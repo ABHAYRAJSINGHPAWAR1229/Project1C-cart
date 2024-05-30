@@ -8,7 +8,7 @@ const store=configureStore({
          cart:cartSliceReducer,
     },
     middleware:(getDefaultMiddleware)=>getDefaultMiddleware().concat(apiSlice.middleware),
-    // devTools:process.env.NODE_ENV !== 'production',
+    // devTools:process.env.NODE_ENV !== 'production'?true:false,
     devTools:true,
 })
 
