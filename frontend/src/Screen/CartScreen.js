@@ -10,7 +10,7 @@ const CartScreen = () => {
     </LinkContainer>
     
     <Card>
-      <CardTitle>Cart</CardTitle>
+      <CardTitle className='bg-warning'>Cart</CardTitle>
       <Card.Body></Card.Body>
     </Card>
 
