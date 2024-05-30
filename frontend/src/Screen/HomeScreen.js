@@ -20,7 +20,7 @@ const HomeScreen = () => {
 // },[])
 
   return (
-    <>
+    < >
     {isLoading ? (
       <Spin />
     ) : error ?(

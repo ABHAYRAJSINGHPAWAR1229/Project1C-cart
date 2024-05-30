@@ -4,7 +4,8 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 const RegistrationScreen = () => {
   return (
-    <>
+    < >
+    
         <div>
             <LinkContainer to='/'>
                 <Button>GO Back</Button>
@@ -12,7 +13,8 @@ const RegistrationScreen = () => {
         </div>
 
 
-    <Card>
+    <Card style={{backgroundColor:'lightgoldenrodyellow' }}>
+    <div>
       <Card.Body className='bg-warning fs-5'>
         Registration
       </Card.Body>
@@ -53,6 +55,7 @@ const RegistrationScreen = () => {
   </div>
   <button type="submit" className="btn btn-primary">Submit</button>
 </form>
+</div>
 </Card>
     </>
   )

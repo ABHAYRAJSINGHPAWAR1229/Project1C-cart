@@ -1,6 +1,6 @@
 import React from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Button,Card, CardTitle } from 'react-bootstrap'
+import { Button,Card, CardTitle, Container } from 'react-bootstrap'
 
 const CartScreen = () => {
   return (
@@ -9,11 +9,12 @@ const CartScreen = () => {
       <Button className='btn-block'>Back</Button>
     </LinkContainer>
     
-    <Card>
-      <CardTitle className='bg-warning'>Cart</CardTitle>
+    <Container style={{display:'flex',justifyContent:'center'}}>
+    <Card style={{width:'600px',backgroundColor:'lightgoldenrodyellow' }}>
+      <CardTitle className='bg-warning' >Cart</CardTitle>
       <Card.Body></Card.Body>
     </Card>
-
+    </Container>
     </>
   )
 }

@@ -11,9 +11,9 @@ const LoginScreen = () => {
                 <Button>GO Back</Button>
             </LinkContainer>
         </div>
-
+       
     <div className='d-flex justify-content-center top-50' >
-      <Card style={{width:'400px',height:'400px' }}>
+      <Card style={{width:'400px',height:'400px',backgroundColor:'lightgoldenrodyellow' }}>
         <form>
         <CardTitle className='bg-warning text-dark'>
           <div>Login</div>
