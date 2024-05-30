@@ -1,9 +1,17 @@
 import React from 'react'
-import { Card } from 'react-bootstrap'
+import { Card,Button, } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 
 const RegistrationScreen = () => {
   return (
     <>
+        <div>
+            <LinkContainer to='/'>
+                <Button>GO Back</Button>
+            </LinkContainer>
+        </div>
+
+
     <Card>
       <Card.Body className='bg-warning fs-5'>
         Registration

@@ -1,7 +1,7 @@
 import React from 'react'
 import {LinkContainer} from 'react-router-bootstrap'
 import {Navbar,Nav,NavLink,Container} from 'react-bootstrap'
-import {FaUser,FaShoppingCart} from 'react-icons/fa'
+import {FaUser,FaShoppingCart,FaBaby} from 'react-icons/fa'
 
 
 const Header = () => {
@@ -26,7 +26,7 @@ const Header = () => {
                       </LinkContainer>
 
                       <LinkContainer to='/register'>
-                        <NavLink ><FaUser/>Registration</NavLink>
+                        <NavLink ><FaBaby/>Registration</NavLink>
                       </LinkContainer>
                 
                       <LinkContainer to='/cart'>
