@@ -9,7 +9,7 @@ import productRoute from './routes/productRoute.js'
  connectDB()   //connection of DB
 const app=express()
 
-const port=5000
+const port=4000
 // const port = process.env.PORT || 8000;
 // const app=express();
 app.get('/',(req,res)=>{
