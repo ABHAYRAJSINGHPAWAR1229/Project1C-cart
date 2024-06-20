@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {  calculation } from '../CartCalcu/calculation';
+//'import {  calculation } from '../CartCalcu/calculation';
 
 // initialState=localStorage.getItem("cart")?JSON.parse(localStorage.getItem("cart")):{cartItems:[0]};
 // const initialState = {
@@ -35,7 +35,7 @@ const cartSlice=createSlice({
           //---------------------------------------------------------------------------------
                    //TRANSFERED IT IN CARTCALCU
           //---------------------------------------------------------------------------------
-        //   // total items price initialamount set to be zero
+          // total items price initialamount set to be zero
           state.totalAmount=calc(state.cartItems.reduce((initialAmount,item)=>initialAmount+item.price*item.qty,0));
 
           //total shipping price
@@ -56,7 +56,7 @@ const cartSlice=createSlice({
         
          localStorage.getItem("cart",JSON.stringify(state))
         //---------------------------------------------------------------------------------
-       // return calculation();
+      // return calculation();
         }
     }
 
