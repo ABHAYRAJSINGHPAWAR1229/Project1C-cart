@@ -1,24 +1,43 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Button,Card, CardTitle, Container } from 'react-bootstrap'
-import {useSelector} from 'react-redux'
+import {Image, Button,Card, CardTitle,FormControl, ListGroup, Row ,Col} from 'react-bootstrap'
+import { useDispatch,useSelector} from 'react-redux'
 import { FaTrash } from 'react-icons/fa'
 import {Table} from 'react-bootstrap'
+import { addToCart,removeCartItems } from '../slices/cartSlice'
+
 
 
 const CartScreen = () => {
 
+  const navigate=useNavigate();
+  const dispatch = useDispatch();
   const cart = useSelector(state => state.cart);
   const { cartItems } = cart;
+  const addToCartHandler=async(products,qty)=>{
+     dispatch(addToCart({...products,qty}));
+  }
 
+  const removeFromCartHandler=async(id)=>{
+    dispatch(removeCartItems(id));
+ }
+
+ const checkoutHandler=async()=>{
+  navigate('/login?redirect=/shipping');
+
+ }
+  
   return (
     <>
     <LinkContainer to='/'>
       <Button className='btn-block'>Back</Button>
     </LinkContainer>
     
-    <Container style={{display:'flex',justifyContent:'center'}}>
-    <Card style={{width:'600px',backgroundColor:'lightgoldenrodyellow' }}>
+    <Row>
+      <Col>
+    
+    <Card style={{width:'600px',backgroundColor:'lightgoldenrodyellow' }} variant='flush'>
       <CardTitle className='bg-warning' >Cart</CardTitle>
       <Card.Body>
        {cartItems.length===0?(<h1>Your cart is empty</h1>):(
@@ -32,48 +51,45 @@ const CartScreen = () => {
           </thead>
           {cartItems.map((item)=>(
                <>
-          <tbody key={item.product}>
+          <tbody key={item._id}>
+            <td><Image src={item.image} fluid rounded width="50px"/></td>
           <td>{item.name}</td>
-             <td>{item.qty}</td>
+             <td> <FormControl as='select' value={item.qty} onChange={(e)=>{addToCartHandler(item,Number(e.target.value))}}>
+                                    {[...Array(item.countInStock).keys()].map((x)=>(
+                                      <option key={x+1} value={x+1}>{x+1}</option>
+                                    ))}
+                                  </FormControl></td>
              <td>&#8377;{item.price}</td>
-             <td><Button variant='danger'><FaTrash/></Button></td>
+             <td><Button variant='danger' onClick={()=>removeFromCartHandler(item._id)}><FaTrash /></Button></td>
           </tbody>
           </>
           ))}
         </Table>
-        // <ListGroup>
-        //   <Row>
-        //     <Col>Product Name</Col>
-        //     <Col>Quantity</Col>
-        //     <Col>Price</Col>
-        //     <Col>Remove</Col>
-        //   </Row>
-
-          
-        //     {cartItems.map((item)=>(
-        //       <>
-        //       <Row></Row>
-        //       <Row key={item.product}>
-              
-        //       <Col>{item.name}</Col>
-        //       <Col>{item.qty}</Col>
-        //       <Col>&#8377;{item.price}</Col>
-        //       <Col><Button variant='danger'><FaTrash/></Button></Col>
-              
-        //       </Row>
-        //       <Row></Row>
-        //       </>
-        //       ))}
-
-         
-        //   <hr/>
-        // </ListGroup>
+       
         
        )}
 
       </Card.Body>
     </Card>
-    </Container>
+    
+    </Col>
+    <Col>
+    
+    <Card  style={{width:'300px',backgroundColor:'lightgoldenrodyellow' }} variant='flush'>
+    <CardTitle className='bg-warning' > Subtotal ({cartItems.reduce((acc,item)=>acc+item.qty,0)}) items</CardTitle>
+      <ListGroup variant='flush'>
+             
+             <ListGroup.Item>
+            <b> &#8377; </b>{cartItems.reduce((acc,item)=>acc + item.qty * item.price,0)}
+             </ListGroup.Item>
+             <ListGroup.Item>
+              <Button type='button' className='btn-block' disabled={cartItems.length===0} onClick={checkoutHandler}>Proceed To Pay</Button>
+             </ListGroup.Item>
+      </ListGroup>
+    </Card>
+    
+    </Col>
+    </Row>
     </>
   )
 }

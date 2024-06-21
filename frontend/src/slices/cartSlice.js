@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-//'import {  calculation } from '../CartCalcu/calculation';
+import { calculation } from '../CartCalcu/calculation'
 
 // initialState=localStorage.getItem("cart")?JSON.parse(localStorage.getItem("cart")):{cartItems:[0]};
 // const initialState = {
@@ -11,9 +11,9 @@ import {createSlice} from '@reduxjs/toolkit'
       // TRANSFER IT IN CARTCALC
 //----------------------------------------------------------------------------------------
 // //for round off and make value two decimal place
-const calc=(num)=>{
-    return (Math.round(num*100)/100).toFixed(2)
-}
+// const calc=(num)=>{
+//     return (Math.round(num*100)/100).toFixed(2)
+// }
 
 //------------------------------------------------------------------------------------------
  
@@ -35,32 +35,37 @@ const cartSlice=createSlice({
           //---------------------------------------------------------------------------------
                    //TRANSFERED IT IN CARTCALCU
           //---------------------------------------------------------------------------------
-          // total items price initialamount set to be zero
-          state.totalAmount=calc(state.cartItems.reduce((initialAmount,item)=>initialAmount+item.price*item.qty,0));
+        //   // total items price initialamount set to be zero
+        //   state.totalAmount=calc(state.cartItems.reduce((initialAmount,item)=>initialAmount+item.price*item.qty,0));
 
-          //total shipping price
-          state.totalShipping=calc(Number(
-            Number(state.totalAmount)>1000 ? 0 :
-            (Number(state.totalAmount)>500 ? 50 :
-            (Number(state.totalAmount)>200 ? 100 : 
-            (Number(state.totalAmount)>100 ? 120:150)))));
+        //   //total shipping price
+        //   state.totalShipping=calc(Number(
+        //     Number(state.totalAmount)>1000 ? 0 :
+        //     (Number(state.totalAmount)>500 ? 50 :
+        //     (Number(state.totalAmount)>200 ? 100 : 
+        //     (Number(state.totalAmount)>100 ? 120:150)))));
 
-         //total gst price
-         state.totalGst=calc(Number(state.totalAmount*0.18));
+        //  //total gst price
+        //  state.totalGst=calc(Number(state.totalAmount*0.18));
 
-         //total Debting Amount
-         state.totalDebitingAmount=calc(
-          Number(state.totalAmount)
-         +Number(state.totalShipping)
-         +Number(state.totalGst))
+        //  //total Debting Amount
+        //  state.totalDebitingAmount=calc(
+        //   Number(state.totalAmount)
+        //  +Number(state.totalShipping)
+        //  +Number(state.totalGst))
         
-         localStorage.getItem("cart",JSON.stringify(state))
+        //  localStorage.getItem("cart",JSON.stringify(state))
         //---------------------------------------------------------------------------------
-      // return calculation();
-        }
+       return calculation(state);
+        },
+      removeCartItems: (state,action) => {
+        state.cartItems = state.cartItems.filter((p) => p._id !== action.payload);
+        return calculation(state);
+      }
+        
     }
 
 })
 
-export const {addToCart}=cartSlice.actions
+export const {addToCart,removeCartItems}=cartSlice.actions
 export default cartSlice.reducer
