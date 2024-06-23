@@ -11,15 +11,17 @@
     "cart": "concurrently \"npm run client\"  \" npm run server\"  ",
     "data-import": "node backend/seeder.js",
     "data-destroy": "node backend/seeder.js -d",
-    "set-arg":"node backend/args.js"
+    "set-arg": "node backend/args.js"
   },
   "author": "Abhay Raj Singh",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
     "colors": "^1.4.0",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.6.2",
     "mongoose": "^8.4.0",
     "nodemon": "^3.1.0"

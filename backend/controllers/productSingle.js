@@ -2,7 +2,7 @@ import asyncHandler from "../middleware/asyncHandler"
 import Product from "../models/productSchema"
 
 // get single products
-// GET /product/:id
+// GET http://localhost:port/product/:id
 //access Public
 const getProductByID=async(req,res)=>{
     const product=await Product.findById(req.params.id)

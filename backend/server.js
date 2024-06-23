@@ -4,10 +4,16 @@ import connectDB from './database/db.js'
 import colors from 'colors'
 import dotenv from 'dotenv'
 import productRoute from './routes/productRoute.js'
+import userRoute from './routes/userRoute.js'
+
 
  dotenv.config();    //env setup
  connectDB()   //connection of DB
 const app=express()
+
+
+app.use(express.json())  //to parse json data
+ app.use(express.urlencoded({ extended : true }))
 
 const port=4000
 // const port = process.env.PORT || 8000;
@@ -26,6 +32,7 @@ app.get('/',(req,res)=>{
 // })
 
 app.use('/products',productRoute)
+app.use('/users',userRoute)
 app.use(notFound);
 app.use(errorHandler)
 

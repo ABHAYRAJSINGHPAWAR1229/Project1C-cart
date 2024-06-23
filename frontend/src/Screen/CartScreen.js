@@ -24,7 +24,7 @@ const CartScreen = () => {
  }
 
  const checkoutHandler=async()=>{
-  navigate('/login?redirect=/shipping');
+  navigate('/users/login?redirect=/shipping');
 
  }
   

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import {Provider} from 'react-redux'
-import store from './store.js'
+import store from './Redux-Store/store'
 
 import {createBrowserRouter,
         createRoutesFromElements,
@@ -22,7 +22,7 @@ const router=createBrowserRouter(
     <Route path='/' element={<App />}>
        <Route index={true} path='/' element={<HomeScreen/>} />
        <Route path='/products/:id' element={<ProductScreen/>} />
-       <Route path='/login' element={<LoginScreen/>} />
+       <Route path='/users/login' element={<LoginScreen/>} />
        <Route path='/cart' element={<CartScreen/>} />
        <Route path='/logout' element={<LogoutScreen/>}/>
        <Route path='/register' element={<RegistrationScreen/>}/>
