@@ -1,6 +1,5 @@
 import express from 'express'
-import User from '../models/userSchema.js'
-import asyncHandler from '../middleware/asyncHandler.js';
+
 import { authUser,
     registerUser,
     logoutUser,
@@ -17,6 +16,7 @@ const router=express.Router();
 //     const user=await User.find({});
 //     res.json(user); 
 // }))
+
 
 
 router.route('/').post(registerUser).get(getUsers);

@@ -5,13 +5,14 @@ import colors from 'colors'
 import dotenv from 'dotenv'
 import productRoute from './routes/productRoute.js'
 import userRoute from './routes/userRoute.js'
+import cookieParser from 'cookie-parser'
 
 
  dotenv.config();    //env setup
  connectDB()   //connection of DB
 const app=express()
 
-
+app.use(cookieParser());
 app.use(express.json())  //to parse json data
  app.use(express.urlencoded({ extended : true }))
 
