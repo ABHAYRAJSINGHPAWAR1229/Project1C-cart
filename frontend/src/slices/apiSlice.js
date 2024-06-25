@@ -11,6 +11,7 @@ export const apiSlice=createApi({
         endpoints:(builder)=>({
             // fetchAllProducts:builder.query({
             //     query:()=>`${BASE_URL}/products`
+
                 }),
     
 })

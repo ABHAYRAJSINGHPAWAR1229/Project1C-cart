@@ -49,34 +49,34 @@ const authUser=asyncHandler(async(req,res)=>{
 //POST http://localhost:port/users/register
 //Access public
 const registerUser=asyncHandler(async(req,res)=>{
-    const {name,email,password,addharNumber,contactNumber,address}=req.body;
-    const userExist=await User.findOne({email});
-    if(userExist){
-        res.status(400);
-        throw new Error("User already exists");
-        }
-        const user=await User.create({
-            name,
-            email,
-            password,
-            addharNumber,
-            contactNumber,
-            address,
-            });
+    // const {name,email,password,addharNumber,contactNumber,address}=req.body;
+    // const userExist=await User.findOne({email});
+    // if(userExist){
+    //     res.status(400);
+    //     throw new Error("User already exists");
+    //     }
+    //     const user=await User.create({
+    //         name,
+    //         email,
+    //         password,
+    //         addharNumber,
+    //         contactNumber,
+    //         address,
+    //         });
 
-            if(user){
-                generateToken(res,user._id);
-                res.status(201).json({
-                    _id:user._id,
-                    name:user.name,
-                    email:user.email,
-                    isAdmin:user.isAdmin,
-                    status:"registered"
-                    });
-                    }else{
-                        res.status(400);
-                        throw new Error("Invalid user data");
-                        }
+    //         if(user){
+    //             generateToken(res,user._id);
+    //             res.status(201).json({
+    //                 _id:user._id,
+    //                 name:user.name,
+    //                 email:user.email,
+    //                 isAdmin:user.isAdmin,
+    //                 status:"registered"
+    //                 });
+    //                 }else{
+    //                     res.status(400);
+    //                     throw new Error("Invalid user data");
+    //                     }
 
     })
 
