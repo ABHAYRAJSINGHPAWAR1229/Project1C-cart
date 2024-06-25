@@ -18,20 +18,41 @@ const users=[{
     isAdmin:true
 },{
     name:'Arpan',
-    email:'arpankumar@gmail.com',
+    email:'arpan@gmail.com',
     password:bcrypt.hashSync('1234',10),
     addharNumber:'445285407793',
     contactNumber:'8737801231',
     address:'kateli banglow post neri kalan sitapur',
     isAdmin:false
-},{
+}
+,{
     name:'chaitanya',
     email:'chaitanya@gmail.com',
     password:bcrypt.hashSync('1234',10),
     addharNumber:'445285407794',
-    contactNumber:'87378012232',
+    contactNumber:'8737801232',
     address:'kateli banglow post neri kalan sitapur',
     isAdmin:false
-}]
+},
+// ,{
+//     name:'Rishabh',
+//     email:'rishabh@gmail.com',
+//     password:bcrypt.hashSync('1234',10),
+//     addharNumber:'445285407795',
+//     contactNumber:'8737801233',
+//     address:'kateli banglow post neri kalan sitapur',
+//     isAdmin:false
+// }
+// },{
+//     name:'arti',
+//     email:'arti@gmail.com',
+//     password:bcrypt.hashSync('1234',10),
+//     addharNumber:'445285407796',
+//     contactNumber:'87378012234',
+//     address:'kateli banglow post neri kalan sitapur',
+//     isAdmin:false
+// }
+
+]
 
 export default users

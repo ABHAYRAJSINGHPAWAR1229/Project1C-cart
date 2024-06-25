@@ -36,7 +36,7 @@ const submitHandler=async(e)=>{
      
   }catch(error){
     toast.error(error?.data?.message || error.error);
-    toast.error("invalid name or password")
+   
 
 
   }
