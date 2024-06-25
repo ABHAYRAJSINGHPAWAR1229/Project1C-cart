@@ -14,10 +14,10 @@ const loginSlice =createSlice({
             state.userInfo=action.payload;
             localStorage.setItem('userInfo',JSON.stringify(action.payload));
             },
-            // logout:(state)=>{
-            //     state.userInfo=null;
-            //     localStorage.removeItem('userInfo');
-            //     }
+            logout:(state,action)=>{
+                state.userInfo=null;
+                localStorage.removeItem('userInfo');
+                }
                 }
 })
 
