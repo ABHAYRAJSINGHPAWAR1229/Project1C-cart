@@ -1,3 +1,4 @@
+
 import { PRODUCTS_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
@@ -17,9 +18,16 @@ export const productsApiSlice=apiSlice.injectEndpoints({
 
           }),
           keepUnusedDataFor:5
+        }),
+        getTopProducts:builder.query({
+            query:()=>({
+                url: `${PRODUCTS_URL}/top-products`,
+                method:'GET'
+                }),
+                keepUnusedDataFor:5
         })
         }),
 
 });
 
-export const {useGetProductsQuery , useGetProductDetailsQuery}=productsApiSlice
+export const {useGetProductsQuery , useGetProductDetailsQuery,useGetTopProductsQuery}=productsApiSlice

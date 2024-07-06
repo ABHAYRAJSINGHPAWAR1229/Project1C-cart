@@ -5,7 +5,12 @@ import Product from '../models/productSchema.js'
 // GET http://localhost:port/products
 //access Public
 const getProducts=asyncHandler(async(req,res)=>{
-    const products=await Product.find({})
+    
+    const keyword=req.query.keyword ? {name:{ $regex:req.query.keyword, $options:'i'}}:{};
+    
+    const count=await Product.countDocuments({...keyword});
+    console.log(count);
+    const products=await Product.find({...keyword})
     res.json(products);
     
  //   const products = await Product.find({})
@@ -35,6 +40,14 @@ const getProductByID=async(req,res)=>{
     }
 }
 
+//get top rated products
+// GET http://localhost:port/products/top
+//access Public
+const getTopProducts=async(req,res)=>{
+    const products=await Product.find({}).sort({rating:-1}).limit(3)
+    res.status(200).json(products)
+    }
 
 
-export { getProducts,getProductByID}
+
+export { getProducts,getProductByID,getTopProducts}

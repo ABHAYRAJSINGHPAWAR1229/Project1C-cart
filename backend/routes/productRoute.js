@@ -2,7 +2,7 @@ import express from 'express'
 //import asyncHandler from '../middleware/asyncHandler.js';
 //import Product from '../models/productSchema.js'
 // import {getProductByID} from '../controllers/productSingle.js'
- import {getProducts,getProductByID} from '../controllers/productController.js'
+ import {getProducts,getProductByID,getTopProducts} from '../controllers/productController.js'
 
 const router =express.Router()
 
@@ -29,5 +29,6 @@ const router =express.Router()
 
 //     //res.send(404).json({message:'Product not Found'})
 // }))
+router.route('/top').get(getTopProducts)
 
 export default router

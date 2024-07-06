@@ -15,7 +15,9 @@ const PlaceOrderScreen = () => {
     // const cart = useSelector(state => state.cart)
     // const user=useSelector((state)=>state.login)
   return (
-    <div>PlaceOrderScreen</div>
+    <div>
+      <CheckOutSteps step1 step2 step3 step4 step5></CheckOutSteps>
+    </div>
   )
 }
 
