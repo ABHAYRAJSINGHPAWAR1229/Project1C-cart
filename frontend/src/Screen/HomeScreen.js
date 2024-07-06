@@ -6,6 +6,7 @@ import Product from '../Component/Product'
 //from redux toolkit
 import { useGetProductsQuery } from '../slices/productsApiSlice'
 import Alerting from '../Component/Alerting'
+import { Link } from 'react-router-dom'
 
 const HomeScreen = () => {
   const {data: products,isLoading,error}=useGetProductsQuery()
@@ -21,6 +22,7 @@ const HomeScreen = () => {
 
   return (
     < >
+    
     {isLoading ? (
       <Spin />
     ) : error ?(

@@ -5,6 +5,7 @@ import colors from 'colors'
 import dotenv from 'dotenv'
 import productRoute from './routes/productRoute.js'
 import userRoute from './routes/userRoute.js'
+import orderRoute from './routes/orderRoutes.js'
 import cookieParser from 'cookie-parser'
 
 
@@ -32,10 +33,11 @@ app.get('/',(req,res)=>{
 //     res.send(product);
 // })
 
-app.use('/products',productRoute)
-app.use('/users',userRoute)
+app.use('/products',productRoute);
+app.use('/users',userRoute);
+app.use('/orders',orderRoute);
 app.use(notFound);
-app.use(errorHandler)
+app.use(errorHandler);
 
 app.listen(port,()=>
 console.log(colors.yellow.inverse(`Server running at port ${port}`)))

@@ -1,9 +1,9 @@
 import React,{useEffect, useState} from 'react'
-import { Form,Button,Col, Card } from 'react-bootstrap'
+import { Form,Button, Card } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import CheckOutSteps from '../Component/CheckOutSteps'
 import { useDispatch, useSelector} from 'react-redux'
-import { useLocation ,useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import { savePaymentMethod } from '../slices/cartSlice'
 
 const PaymentScreen = () => {
