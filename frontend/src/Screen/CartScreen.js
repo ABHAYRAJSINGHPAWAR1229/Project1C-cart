@@ -6,7 +6,7 @@ import { useDispatch,useSelector} from 'react-redux'
 import { FaTrash } from 'react-icons/fa'
 import {Table} from 'react-bootstrap'
 import { addToCart,removeCartItems } from '../slices/cartSlice'
-
+import CheckOutSteps from '../Component/CheckOutSteps'
 
 
 const CartScreen = () => {
@@ -34,6 +34,8 @@ const CartScreen = () => {
       <Button className='btn-block'>Back</Button>
     </LinkContainer>
     
+    <CheckOutSteps step1 step2/>
+
     <Row>
       <Col>
     

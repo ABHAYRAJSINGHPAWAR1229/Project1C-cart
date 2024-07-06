@@ -3,7 +3,8 @@ import {Form,Button, Card} from 'react-bootstrap'
 import { useDispatch,useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { saveShippingAddress } from '../slices/cartSlice'
-
+import CheckOutSteps from '../Component/CheckOutSteps'
+import { LinkContainer } from 'react-router-bootstrap'
 
 
 const ShippingScreen= () => {
@@ -28,7 +29,14 @@ const ShippingScreen= () => {
         }
 
 return(
-   
+   <>
+    <LinkContainer to='/'>
+      <Button className='btn-block'>Back</Button>
+    </LinkContainer>
+    
+
+    <CheckOutSteps step1 step2 step3/>
+
     <Card  className='bg-warning fs-5' >
         <Card.Title>
         <h1>Shipping</h1>
@@ -71,6 +79,7 @@ return(
         </Card.Body>
         
     </Card>
+    </>
   )
 }
 

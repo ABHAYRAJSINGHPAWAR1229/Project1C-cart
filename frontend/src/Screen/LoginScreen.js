@@ -8,6 +8,7 @@ import {useLoginMutation} from '../slices/userApiSlice'
 import {setCredentials} from '../slices/loginSlice'
 import {toast,ToastContainer} from 'react-toastify'
 import 'react-toastify/ReactToastify.min.css'
+import CheckOutSteps from '../Component/CheckOutSteps'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
@@ -56,6 +57,7 @@ const resetHandler=async(e)=>{
             </LinkContainer>
         </div>
        <ToastContainer/>
+       <CheckOutSteps step1/>
 
        
     <div className='d-flex justify-content-center top-50' >
