@@ -36,9 +36,7 @@ const submitHandler=async(e)=>{
      
   }catch(error){
     toast.error(error?.data?.message || error.error);
-   
-
-
+ 
   }
 
 }
@@ -69,6 +67,7 @@ const resetHandler=async(e)=>{
         <CardTitle className='bg-warning text-dark'>
           <div>Login</div>
         </CardTitle>
+        <CardBody>
         <form action='/login' method='POST'>
           <label for='email' className='text-secondary'><h2>User Email</h2></label><br></br><input type='email' id='email' className='form-control h2' value={email} placeholder='Enter your email' onChange={(e)=>setEmail(e.target.value)}/><br/>
           <label for='pass' className='text-secondary'><h3>Password</h3></label><br></br><input type='password' className='form-control' id='pass' value={password} placeholder='Enter your Password' onChange={(e)=>setPassword(e.target.value)}/><br/>
@@ -79,6 +78,7 @@ const resetHandler=async(e)=>{
           {isLoading && <Spinner/>}
         
         </form>
+        </CardBody>
       </Card>
     </div>
     </>

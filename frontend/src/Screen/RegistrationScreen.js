@@ -1,8 +1,66 @@
-import React from 'react'
+import { useState,useEffect } from 'react'
+import { useRegisterMutation } from '../slices/userApiSlice'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Card,Button, } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import { setCredentials } from '../slices/loginSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast ,ToastContainer} from 'react-toastify'
+import 'react-toastify/ReactToastify.min.css'
+import Spinner from '../Component/Spinner'
+
 
 const RegistrationScreen = () => {
+   const [name,setName] = useState('')
+   const [email,setEmail] = useState('')
+   const [password,setPassword] = useState('')
+   const [confirmPassword,setConfirmPassword] = useState('')
+   const [addharNumber,setAddhar]=useState('')
+   const [contactNumber,setContactNo]=useState('')
+   const [address,setAddress]=useState('')
+   const [register,{isLoading}] = useRegisterMutation()
+
+   const dispatch =useDispatch();
+   const navigate = useNavigate();
+   const {userInfo} = useSelector((state) => state.login)
+   const {search}=useLocation();
+   const redirect = new URLSearchParams(search).get('redirect') || '/';
+   useEffect(()=>{
+    if(userInfo){
+      navigate(redirect)
+      }
+  },[userInfo,redirect,navigate])
+
+  
+const submitHandler=async(e)=>{
+  e.preventDefault()
+  if(password!==confirmPassword ){
+    toast.error('Password and Confirm Password does not match')
+    return
+    }
+    else{
+    try{
+      const res = await register({name,email,password,addharNumber,contactNumber,address})
+      dispatch(setCredentials({...res}))
+      navigate(redirect)
+      }catch(error){
+        toast.error(error?.data?.message || error.error);
+        }
+        }
+
+}
+const resetHandler=async(e)=>{
+  e.preventDefault();
+  setName('')
+  setEmail('')
+  setPassword('')
+  setConfirmPassword('')
+  setAddhar('')
+  setContactNo('')
+  setAddress('')
+}
+
+
   return (
     < >
     
@@ -11,7 +69,7 @@ const RegistrationScreen = () => {
                 <Button>GO Back</Button>
             </LinkContainer>
         </div>
-
+        <ToastContainer/>
 
     <Card style={{backgroundColor:'lightgoldenrodyellow' }}>
     <div>
@@ -20,40 +78,49 @@ const RegistrationScreen = () => {
       </Card.Body>
      <form>
      <div className="mb-3">
-    <label for="uname" className="form-label fs-4">Name</label>
-    <input type="text" className="form-control" id="uname" />
+    <label for="userName" className="form-label "><b>Name</b></label>
+    <input type="text" className="form-control" id="userName" value={name} placeholder='Enter user Name' onChange={(e)=>setName(e.target.value)} />
   </div>
 
   <div className="mb-3">
-    <label for="email" className="form-label">Email address</label>
-    <input type="email" className="form-control" id="email" />
+    <label for="email" className="form-label"><b>Email address</b></label>
+    <input type="email" className="form-control" id="email" value={email} placeholder='Enter email' onChange={(e)=>setEmail(e.target.value)} />
   </div>
 
   <div className="mb-3">
-    <label for="addhar" className="form-label">Addhar Card Number</label>
-    <input type="number" className="form-control" id="addhar" />
+    <label for="password" className="form-label"><b> Password</b></label>
+    <input type="password" className="form-control" id="password" value={password} placeholder='Enter Password' onChange={(e)=>setPassword(e.target.value)}/>
   </div>
 
   <div className="mb-3">
-    <label for="pass" className="form-label">Re-Enter Your Password</label>
-    <input type="password" className="form-control" id="pass"/>
+    <label for="confirmPassword" className="form-label"><b>Confirm Password</b></label>
+    <input type="password" className="form-control" id="confirmPassword" value={confirmPassword} placeholder='Again type Password' onChange={(e)=>setConfirmPassword(e.target.value)}/>
   </div>
 
   <div className="mb-3">
-    <label for="pass" className="form-label">New Password</label>
-    <input type="password" className="form-control" id="pass"/>
+    <label for="addhar" className="form-label"><b>Addhar Card Number</b></label>
+    <input type="number" className="form-control" id="addhar" value={addharNumber} placeholder='Enter your addhar number' onChange={(e)=>setAddhar(e.target.value)}/>
+  </div>
+
+ 
+
+  <div className="mb-3">
+    <label for="contactNo" className="form-label"><b>Contact Number</b></label>
+    <input type="number" className="form-control" id="contactNo" value={contactNumber} placeholder='Enter your Contact Number' onChange={(e)=>setContactNo(e.target.value)}/>
   </div>
 
   <div className="mb-3">
-    <label for="add" className="form-label">Full Address</label>
-    <textarea className="form-control" id="addhar" />
+    <label for="address" className="form-label"><b>Full Address</b></label>
+    <textarea className="form-control" id="address" value={address} placeholder='Enter full Address' onChange={(e)=>setAddress(e.target.value)}/>
   </div>
 
   <div className="mb-3 form-check">
     <input type="checkbox" className="form-check-input" id="C-1"/>
     <label className="form-check-label" for="C-1">Accept term and Conditions</label>
   </div>
-  <button type="submit" className="btn btn-primary">Submit</button>
+  <button type="submit" className="btn btn-primary" onClick={submitHandler}>Submit</button>
+  <button type='reset' id='btn2' className='btn btn-danger' onClick={resetHandler}>Reset</button>
+  {isLoading && <Spinner/>}
 </form>
 </div>
 </Card>

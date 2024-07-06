@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
 import { calculation } from '../CartCalcu/calculation'
 
+
 // initialState=localStorage.getItem("cart")?JSON.parse(localStorage.getItem("cart")):{cartItems:[0]};
 // const initialState = {
 //     items: [],
@@ -20,7 +21,7 @@ import { calculation } from '../CartCalcu/calculation'
 
 const initialState = localStorage.getItem("cart")
 ? JSON.parse(localStorage.getItem("cart"))
-:{cartItems:[]};
+:{cartItems:[],shippingAddress:{},paymentMethod:'PayPal'};
 
 const cartSlice=createSlice({
     name:"cart",
@@ -64,11 +65,26 @@ const cartSlice=createSlice({
       removeCartItems: (state,action) => {
         state.cartItems = state.cartItems.filter((p) => p._id !== action.payload);
         return calculation(state);
-      }
+      },saveShippingAddress:(state,action)=>{
+        state.shippingAddress=action.payload;
+        localStorage.setItem("cart",JSON.stringify(state))
+      },savePaymentMethod:(state,action)=>{
+        state.paymentMethod=action.payload;
+        localStorage.setItem("cart",JSON.stringify(state));
+      },
+      clearCartItems:(state,action)=>{
+        state.cartItems= [];
+        state.totalAmount=0;
+        state.totalShipping=0;
+        state.totalGst=0;
+        state.totalDebitingAmount=0;
+        localStorage.setItem("cart",JSON.stringify(state));
+      },
+      resetCart:(state)=>(state=initialState)
         
     }
 
 })
 
-export const {addToCart,removeCartItems}=cartSlice.actions
+export const {addToCart,removeCartItems,saveShippingAddress}=cartSlice.actions
 export default cartSlice.reducer

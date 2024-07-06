@@ -10,8 +10,12 @@ import { useNavigate } from 'react-router-dom'
 const Header = () => {
 
   const {cartItems} =useSelector((state)=>state.cart);
-  const {userInfo} =useSelector((state)=>state.login)
+  const {userInfo} =useSelector((state)=>state.login);
+
+  
+
   console.log(cartItems);
+  console.log(userInfo);
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const [logoutApiCall]=useLogoutMutation();
@@ -45,6 +49,7 @@ const Header = () => {
             <Navbar.Collapse id='basic-Navbar-nav'>
                 <Nav className='ms-auto'>
 
+{/* //registration time it give userInfo.data.name */}
                   {userInfo?(
                     <NavDropdown title={userInfo.name} id='name'>
                       <LinkContainer to='/profile'>
