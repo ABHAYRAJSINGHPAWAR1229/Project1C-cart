@@ -25,7 +25,7 @@ const orderSchema=mongoose.Schema({
     totalAmount:{ type:Number , required:true,default:0.0},
     totalShipping:{ type:Number,required:true,default:0.0},
     totalGst:{ type:Number,required:true,default:0.0},
-    totalDebtingAmount:{ type:Number,required:true,default:0},
+    totalDebtingAmount:{ type:Number,required:true,default:0.0},
     isPaid:{type:Boolean,default:false},
     paidAt:{type:Date},
     isDelivered:{type:Boolean,default:false},

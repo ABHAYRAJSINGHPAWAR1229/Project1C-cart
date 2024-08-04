@@ -27,9 +27,11 @@ const PlaceOrderScreen=()=>{
           totalDebitingAmount:cart.totalDebitingAmount
          }).unwrap();
          dispatch(clearCartItems());
-         navigate(`/order/${orderCre._id}`);
+         navigate(`/order?/${orderCre._id}`);
     }catch(error){
-        toast.error(error)
+      console.error(error); // Log the error to see its structure
+      const errorMessage = error?.data?.message || error.message || 'An unexpected error occurred';
+      toast.error(errorMessage);
     }
   
   }

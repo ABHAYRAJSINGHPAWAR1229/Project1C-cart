@@ -22,7 +22,7 @@ const createOrder=asyncHandler(async(req,res)=>{
             totalDebtingAmount})
             
             const createdOrder=await order.save();
-            res.status(201).json(createdOrder)
+             res.status(201).json(createdOrder)
             
     }
  

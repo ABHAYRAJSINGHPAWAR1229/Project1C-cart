@@ -3,7 +3,7 @@ import { Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 
-const CheckOutSteps = ({step1,step2,step3,step4,step5}) => {
+const CheckOutSteps = ({step1,step2,step3,step4,step5,step6}) => {
   return (
     <Nav className='justify-content-center mb-4 '>
       <Nav.Item className='badge text-bg-warning'>
@@ -45,6 +45,14 @@ const CheckOutSteps = ({step1,step2,step3,step4,step5}) => {
             <Nav.Link>Place Order &#8658;</Nav.Link>
             </LinkContainer>
             ):(<Nav.Link disabled>Place Order</Nav.Link>)}
+      </Nav.Item>
+
+      <Nav.Item className='badge text-bg-warning' >
+        {step6?(
+          <LinkContainer to='/order' className={step6 ? 'active' : ''}>
+            <Nav.Link>Order &#8658;</Nav.Link>
+            </LinkContainer>
+            ):(<Nav.Link disabled>Order</Nav.Link>)}
       </Nav.Item>
     </Nav>
   )
