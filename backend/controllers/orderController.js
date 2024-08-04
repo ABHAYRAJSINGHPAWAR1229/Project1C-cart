@@ -5,7 +5,7 @@ import Order from '../models/orderSchema.js'
 //POST http://localhost:3000/orders
 //Private
 const createOrder=asyncHandler(async(req,res)=>{
-    const {orderItems,shippingAddress,paymentMethod,itemsPrice,totalGst,totalShipping,totalPrice}=req.body;
+    const {orderItems,shippingAddress,paymentMethod,totalAmount,totalShipping,totalGst,totalDebtingAmount}=req.body;
     if(orderItems && orderItems.length===0){
         res.status(400).json({success:false,message:"No order items found."})
     }else{
@@ -13,18 +13,19 @@ const createOrder=asyncHandler(async(req,res)=>{
             orderItems:orderItems.map((x)=>({...x,product:x._id,
                 _id:undefined
             })),
+            user:req.user._id,
             shippingAddress,
             paymentMethod,
-            itemsPrice,
-            totalGst,
+            totalAmount,
             totalShipping,
-            totalPrice,
-            user:req.user._id})
+            totalGst,
+            totalDebtingAmount})
             
             const createdOrder=await order.save();
-            res.status(201).json({success:true,message:"Order created successfully.",data:createdOrder})
+            res.status(201).json(createdOrder)
             
     }
+ 
     
 
 });
@@ -36,6 +37,7 @@ const getMyOrders=asyncHandler(async(req,res)=>{
 
      const orders=await Order.find({user:req.user._id})
      res.status(200).json({success:true,orders:orders})
+    
 });
 
 //get order by id
@@ -99,8 +101,9 @@ const updateOrderToDelivered=asyncHandler(async(req,res)=>{
     const getAllOrders=asyncHandler(async(req,res)=>{
         
 
-       //  const orders=await Order.find({}).populate('user','name')
-         //res.status(200).json({success:true,orders:orders})
+        const orders=await Order.find({}).populate('user','name')
+         res.status(200).json({success:true,orders:orders})
+        
         });
 
         export{

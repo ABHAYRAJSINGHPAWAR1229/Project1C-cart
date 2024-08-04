@@ -10,10 +10,10 @@ const orderSchema=mongoose.Schema({
         product:{type:mongoose.Schema.Types.ObjectId,required:true, ref:"Product"}
     }],
     shippingAddress:{
-        address:{type:String,required:true},
-        city:{type:String,required:true},
-        postalCode:{type:String,required:true},
-        country:{type:String,required:true},
+        address:{type:String},
+        city:{type:String},
+        postalCode:{type:String},
+        country:{type:String},
     },
     paymentMethod:{type:String,required:true},
     paymentResult:{ 
@@ -22,13 +22,13 @@ const orderSchema=mongoose.Schema({
         update_time:{type:String},
         email_address:{type:String},
     },
-    itemprice:{ type:Number , required:true,default:0},
-    taxPrice:{ type:Number,required:true,default:0},
-    shippingPrice:{ type:Number,required:true,default:0},
-    totalPrice:{ type:Number,required:true,default:0},
-    isPaid:{type:Boolean,required:true,default:false},
+    totalAmount:{ type:Number , required:true,default:0.0},
+    totalShipping:{ type:Number,required:true,default:0.0},
+    totalGst:{ type:Number,required:true,default:0.0},
+    totalDebtingAmount:{ type:Number,required:true,default:0},
+    isPaid:{type:Boolean,default:false},
     paidAt:{type:Date},
-    isDelivered:{type:Boolean,required:true,default:false},
+    isDelivered:{type:Boolean,default:false},
     deliveredAt:{type:Date},
     },{
         timestamps:true

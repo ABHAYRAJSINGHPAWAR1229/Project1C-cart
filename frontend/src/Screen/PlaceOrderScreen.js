@@ -13,9 +13,25 @@ const PlaceOrderScreen=()=>{
   const navigate=useNavigate();
   const cart=useSelector((state)=>state.cart)
   const [createOrders,{isLoading,error}]=useCreateOrderMutation()
+  const dispatch=useDispatch();
 
   const submitHandler = async() =>{
-
+    try{
+         const orderCre=await createOrders({
+          orderItems:cart.cartItems,
+          shippingAddress:cart.shippingAddress,
+          paymentMethod:cart.paymentMethod,
+          totalAmount:cart.totalAmount,
+          totalShipping:cart.totalShipping,
+          totalGst:cart.totalGst,
+          totalDebitingAmount:cart.totalDebitingAmount
+         }).unwrap();
+         navigate(`/order/${orderCre._id}`);
+         dispatch(clearCartItems());
+    }catch(error){
+        toast.error(error)
+    }
+  
   }
 
   useEffect(()=>{
@@ -148,7 +164,7 @@ const PlaceOrderScreen=()=>{
       </Row>
       {error && <Alerting variant='danger'>{error}</Alerting>}
       <Button type='submit' className='btn btn-sm' onClick={submitHandler} disabled={cart.cartItems.length===0} >Place Order</Button>
-       
+       {isLoading &&<Spinner/>}
       </Card.Body>
       </Card>
       
