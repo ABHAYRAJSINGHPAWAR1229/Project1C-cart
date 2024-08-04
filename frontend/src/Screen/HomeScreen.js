@@ -8,6 +8,7 @@ import { useGetProductsQuery } from '../slices/productsApiSlice'
 import Alerting from '../Component/Alerting'
 import { Link } from 'react-router-dom'
 
+
 const HomeScreen = () => {
   const {data: products,isLoading,error}=useGetProductsQuery()
 // const [products,setProducts]=useState([])
@@ -31,6 +32,7 @@ const HomeScreen = () => {
       <>
       
       <h1 >Latest Product</h1>
+     
       <Row>
           {products.map((product)=>(
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>

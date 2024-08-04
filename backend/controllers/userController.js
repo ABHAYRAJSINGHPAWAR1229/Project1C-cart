@@ -35,6 +35,7 @@ const authUser=asyncHandler(async(req,res)=>{
         _id:user._id,
         name:user.name,
         email:user.email,
+        contactNumber:user.contactNumber,
         address:user.address,
         isAdmin:user.isAdmin,
 
@@ -71,6 +72,7 @@ const registerUser=asyncHandler(async(req,res)=>{
                     _id:user._id,
                     name:user.name,
                     email:user.email,
+                    contactNumber:user.contactNumber,
                     address:user.address,
                     isAdmin:user.isAdmin,
                     status:"registered"
@@ -129,7 +131,27 @@ const registerUser=asyncHandler(async(req,res)=>{
                 //PUT localhost:port/users/profile
                 //Access private
      const updateUserProfile=asyncHandler(async(req,res)=>{
-          res.send("update user profile");
+        //   res.send("update user profile");
+        const {name,email,addharNumber,contactNumber,address}=req.body;
+        
+        const user=await User.findById(req.user._id);
+        if(user){
+
+                
+                const user=await User.updateUserProfile({
+                    name,
+                    email,
+                    password,
+                    addharNumber,
+                    contactNumber,
+                    address,
+                    })
+            
+        }else{
+            res.status(404);
+            throw new Error("User not found");
+        }
+
      });
 
                 //get all users

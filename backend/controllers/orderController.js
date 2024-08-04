@@ -20,6 +20,7 @@ const createOrder=asyncHandler(async(req,res)=>{
             totalShipping,
             totalPrice,
             user:req.user._id})
+            
             const createdOrder=await order.save();
             res.status(201).json({success:true,message:"Order created successfully.",data:createdOrder})
             

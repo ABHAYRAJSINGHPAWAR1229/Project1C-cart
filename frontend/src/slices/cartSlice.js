@@ -75,11 +75,12 @@ const cartSlice=createSlice({
       },
       clearCartItems:(state,action)=>{
         state.cartItems= [];
-        state.totalAmount=0;
-        state.totalShipping=0;
-        state.totalGst=0;
-        state.totalDebitingAmount=0;
-        localStorage.setItem("cart",JSON.stringify(state));
+        return calculation(state);
+        // state.totalAmount=0;
+        // state.totalShipping=0;
+        // state.totalGst=0;
+        // state.totalDebitingAmount=0;
+        // localStorage.setItem("cart",JSON.stringify(state));
       },
       resetCart:(state)=>(state=initialState)
         
@@ -87,5 +88,5 @@ const cartSlice=createSlice({
 
 })
 
-export const {addToCart,removeCartItems,saveShippingAddress,savePaymentMethod}=cartSlice.actions
+export const {addToCart,removeCartItems,saveShippingAddress,savePaymentMethod ,clearCartItems}=cartSlice.actions
 export default cartSlice.reducer
