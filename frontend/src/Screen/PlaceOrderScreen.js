@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
-import {Link,useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {Button,Row ,Col,ListGroup,Image,Card} from 'react-bootstrap'
+import {Button,Row ,Col,ListGroup,Card} from 'react-bootstrap'
 import CheckOutSteps from '../Component/CheckOutSteps'
 import { toast } from 'react-toastify';
 import Alerting from '../Component/Alerting'
@@ -24,10 +24,10 @@ const PlaceOrderScreen=()=>{
           totalAmount:cart.totalAmount,
           totalShipping:cart.totalShipping,
           totalGst:cart.totalGst,
-          totalDebitingAmount:cart.totalDebitingAmount
+          totalDebtingAmount:cart.totalDebitingAmount
          }).unwrap();
-         dispatch(clearCartItems());
-         navigate(`/order?/${orderCre._id}`);
+        //  dispatch(clearCartItems());
+         navigate(`/order/${orderCre._id}`);
     }catch(error){
       console.error(error); // Log the error to see its structure
       const errorMessage = error?.data?.message || error.message || 'An unexpected error occurred';
@@ -114,10 +114,10 @@ const PlaceOrderScreen=()=>{
                     &#8377; {item.price}
                     </Col>
                     <Col>
-                    {item.countInStock}
+                    {item.qty}
                     </Col>
                     <Col>
-                    &#8377; {item.price * item.countInStock}
+                    &#8377; {item.price * item.qty}
                     </Col>
                   </Row>
                   

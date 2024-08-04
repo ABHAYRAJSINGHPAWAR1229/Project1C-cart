@@ -83,7 +83,7 @@ const updateOrderToPaid=asyncHandler(async(req,res)=>{
 
 
 //update order to delivered
-//GET http://localhost:3000/orders/:id/deliver
+//Put http://localhost:3000/orders/:id/deliver
 //private Admin
 const updateOrderToDelivered=asyncHandler(async(req,res)=>{
     res.send('update order to delivered')

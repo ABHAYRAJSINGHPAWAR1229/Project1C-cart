@@ -3,6 +3,10 @@ const notFound=(req,res,next)=>{
     const  error =new Error(`Not Found - ${req.originalUrl}`)
     res.status(404)
     next(error)
+    // res.json({
+    //     message:error.message,
+    //     stack:process.env.NODEENV ==='production'? '#####' : error.stack
+    // })
 
 }
 
@@ -15,10 +19,12 @@ const errorHandler=(err,req,res,next)=>{
         statusCode=404
     }
 
-    res.status(statusCode).json({
-        message,
-        stack: process.env.NODE_ENV === 'production'? '#####' : err.stack
-    })
+//multiple req send that's why i stop it
+
+    // res.status(statusCode).json({
+    //     message,
+    //     stack: process.env.NODE_ENV === 'production'? '#####' : err.stack
+    // })
 }
 
 export { notFound,errorHandler}
