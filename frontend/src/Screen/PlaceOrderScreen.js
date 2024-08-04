@@ -26,8 +26,8 @@ const PlaceOrderScreen=()=>{
           totalGst:cart.totalGst,
           totalDebitingAmount:cart.totalDebitingAmount
          }).unwrap();
-         navigate(`/order/${orderCre._id}`);
          dispatch(clearCartItems());
+         navigate(`/order/${orderCre._id}`);
     }catch(error){
         toast.error(error)
     }
