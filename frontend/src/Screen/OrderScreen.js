@@ -1,7 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import {PayPalButtons,usePayPalScriptReducer} from '@paypal/react-paypal-js'
 import { usePayOrderMutation,useGetPayPalClientQuery } from '../slices/orderApiSlice'
-import {toast} from 'react-toastify'
+import {toast ,ToastContainer} from 'react-toastify'
 import {useNavigate} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import CheckOutSteps from '../Component/CheckOutSteps'
@@ -94,9 +94,12 @@ const OrderScreen = () => {
 
   return (
     <>
-   
+   <ToastContainer/>
       <CheckOutSteps step1 step2 step3 step4 step5 step6 />
-      <Alerting>Your Order is Received successfully. Your Order Id number is <u>{orderId}</u></Alerting>
+      {ord.order.isPaid ? (<Alerting variant='success'>Your Order is Received successfully. Your Order Id number is <u>{orderId}</u></Alerting>):(
+        <Alerting variant='info'>Your Payment is not complete.</Alerting>
+      )}
+      
       <h1><strong>My Orders</strong></h1>
       <Row>
         <Col>
