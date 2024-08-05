@@ -31,8 +31,8 @@ export const usersApiSlice=apiSlice.injectEndpoints({
                 url:USERS_URL+`/profile`,
                 method:'PUT',
                 body:data,
-            })
-        })
+            }),
+        }),
         }),
         
 

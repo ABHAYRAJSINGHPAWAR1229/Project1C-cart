@@ -9,9 +9,9 @@ import jwt from 'jsonwebtoken'
 //POST http://localhost:port/users/login
 //Access public
 const authUser=asyncHandler(async(req,res)=>{
-    console.log(req.body)
-    console.log(process.env.JWT_SECRET)
-    console.log(process.env.NODE_ENV)
+    // console.log(req.body)
+    // console.log(process.env.JWT_SECRET)
+    // console.log(process.env.NODE_ENV)
     const {email,password}=req.body;
   const user=await User.findOne({email});
   if(user && (await user.matchPassword(password))){
@@ -107,38 +107,70 @@ const registerUser=asyncHandler(async(req,res)=>{
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
      const getUserProfile=asyncHandler(async(req,res)=>{
-        // console.log(req.params._id)
-        console.log(req.user._id)
-        const user=await User.findById(req.user._id);
-        if(user){
-            res.status(200).json({
-                _id:user._id,
-                name:user.name,
-                email:user.email,
-                addharNumber:user.addharNumber,
-                contactNumber:user.contactNumber,
-                address:user.address,
-                isAdmin:user.isAdmin,
-                status:"profile"
-            })
-        }else{
-            res.status(404);
-            throw new Error("User not found");
-        }
+      
+       
+        // console.log(req.user._id +"checking id")
+        // const user=await User.findById(req.user._id);
+        // if(user){
+        //     res.status(200).json({
+        //         _id:user._id,
+        //         name:user.name,
+        //         email:user.email,
+        //         addharNumber:user.addharNumber,
+        //         contactNumber:user.contactNumber,
+        //         address:user.address,
+        //         isAdmin:user.isAdmin,
+        //         status:"profile"
+        //     })
+        // }else{
+        //     res.status(404);
+        //     throw new Error("User not found");
+        // }
     });
 
                 //update user profile
                 //PUT localhost:port/users/profile
                 //Access private
+              //  const updateUserProfile = asyncHandler(async (req, res) => {
+                //     res.send("update user")
+                    // const user = await User.findById(req.user._id);
+                  
+                    // if (user) {
+                    //   //update user or leave user as it was
+                    //   user.name = req.body.name || user.name;
+                    //   user.email = req.body.email || user.email;
+                  
+                    //   //only do it if you are updating the password
+                    //   if (req.body.password) {
+                    //     user.password = req.body.password;
+                    //   }
+                    //   const updated = await user.save();
+                    //   res.status(200).json({
+                    //     _id: updated._id,
+                    //     name: updated.name,
+                    //     email: updated.email,
+                    //     password:updated.password,
+                    //     contactNumber:updated.contactNumber,
+                    //     address:updated.address, 
+                    //     isAdmin: updated.isAdmin,
+                    //   });
+                    // } else {
+                    //   res.status(404);
+                    //   throw new Error("User not found");
+                    // }
+             //     });    
+
      const updateUserProfile=asyncHandler(async(req,res)=>{
         //   res.send("update user profile");
-        const {name,email,addharNumber,contactNumber,address}=req.body;
+        console.log(req.body._id +"check");
+        const {name,email,password,addharNumber,contactNumber,address}=req.body;
         
-        const user=await User.findById(req.user._id);
-        if(user){
+         const userExist=await User.findById(req.body._id);
+         console.log(userExist)
+        if(userExist){
 
                 
-                const user=await User.updateUserProfile({
+                const userExist=await User.updateOne({
                     name,
                     email,
                     password,
@@ -146,6 +178,8 @@ const registerUser=asyncHandler(async(req,res)=>{
                     contactNumber,
                     address,
                     })
+
+                    console.log("updated")
             
         }else{
             res.status(404);

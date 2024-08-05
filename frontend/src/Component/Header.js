@@ -53,7 +53,7 @@ const Header = () => {
 {/* //registration time it give userInfo.data.name */}
                   {userInfo?(
                     <NavDropdown title={userInfo.name} id='name'>
-                      <LinkContainer to='/profile'>
+                      <LinkContainer to='/users/profile'>
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                       </LinkContainer>
                       <NavDropdown.Item onClick={logoutHandler}>

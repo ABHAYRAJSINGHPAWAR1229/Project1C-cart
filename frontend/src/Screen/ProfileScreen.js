@@ -7,9 +7,13 @@ import Alerting from '../Component/Alerting'
 import Spinner from '../Component/Spinner'
 import { useProfileMutation } from '../slices/userApiSlice'
 import { setCredentials } from '../slices/loginSlice'
-
+import { useNavigate } from 'react-router-dom'
+import bcrypt from 'bcryptjs'
 
 const ProfileScreen = () => {
+    const {userInfo}=useSelector((state)=>(state.login))
+   
+    
     const [name,setName]=useState("");
     const [email,setEmail]=useState("");
     const [contactNumber,setContactNumber]=useState("")
@@ -21,9 +25,9 @@ const ProfileScreen = () => {
     const [confirmPassword,setConfirmPassword]=useState("");
     
     const dispatch=useDispatch();
-    const {userInfo}=useSelector((state)=>(state.login))
+    const navigate=useNavigate();
 
-    const [updateProfile,{isloading:loadingUpdateProfile,error}]=useProfileMutation()
+    const [updateProfile,{loadingUpdateProfile,error}]=useProfileMutation()
 
     useEffect(()=>{
           if(userInfo){
@@ -36,14 +40,19 @@ const ProfileScreen = () => {
             setPinCode(userInfo.pinCode)
 
           }
-    },[userInfo.name,userInfo.email])
+    },[userInfo,userInfo.name,userInfo.email])
 
     const submitHandler =async(e)=>{
         e.preventDefault();
+       
         if(password===confirmPassword){
           try{
-              const res=await updateProfile({ _id:userInfo._id,name,email,contactNumber,address,password})
-          }catch(error){
+            toast.success('Profile Successfully Updated')
+            const res=await updateProfile({ _id : userInfo._id, name,email,address,contactNumber,password:bcrypt.hashSync(password,10)}).unwrap();
+            navigate('/')
+              dispatch(setCredentials(res));
+             
+            }catch(error){
             toast.error(error?.data?.message || error.message)
           }
             }
@@ -82,13 +91,13 @@ const ProfileScreen = () => {
 
                 <ListGroup.Item variant='warning'>
                 <Col> <p><strong> Password : </strong></p>  </Col>
-                <Col><input id="password" name="password" onChange={(e)=>setPassword(e.target.value)}/></Col>
+                <Col><input id="password" name="password" onChange={(e)=>setPassword(e.target.value)} required/></Col>
                 </ListGroup.Item>
                
 
                 <ListGroup.Item style={{backgroundColor:'lightgoldenrodyellow'}}>
                 <Col> <p><strong> Confirm Password : </strong></p>  </Col>
-                <Col><input id="confirmPassword" name="confirmPassword" onChange={(e)=>setConfirmPassword(e.target.value)}/></Col>
+                <Col><input id="confirmPassword" name="confirmPassword" onChange={(e)=>setConfirmPassword(e.target.value)} Required/></Col>
                 </ListGroup.Item>
 {/*                
 
@@ -111,6 +120,7 @@ const ProfileScreen = () => {
                 <ListGroup.Item variant='warning'>
                 <Button onClick={submitHandler}>Update</Button>
                 {loadingUpdateProfile && <Spinner/>}
+                {error && toast.error("Problem occured")}
                 </ListGroup.Item>
                 </ListGroup>
 
