@@ -1,3 +1,4 @@
+
 import asyncHandler from "../middleware/asyncHandler.js";
 import Order from '../models/orderSchema.js'
 
@@ -36,7 +37,7 @@ const createOrder=asyncHandler(async(req,res)=>{
 const getMyOrders=asyncHandler(async(req,res)=>{
 
      const orders=await Order.find({user:req.user._id})
-     res.status(200).json({success:true,orders:orders})
+     res.status(200).json(orders)
     
 });
 

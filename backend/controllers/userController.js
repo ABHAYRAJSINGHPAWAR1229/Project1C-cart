@@ -162,11 +162,11 @@ const registerUser=asyncHandler(async(req,res)=>{
 
      const updateUserProfile=asyncHandler(async(req,res)=>{
         //   res.send("update user profile");
-        console.log(req.body._id +"check");
+        // console.log(req.body._id +"check");
         const {name,email,password,addharNumber,contactNumber,address}=req.body;
         
          const userExist=await User.findById(req.body._id);
-         console.log(userExist)
+        //  console.log(userExist)
         if(userExist){
 
                 

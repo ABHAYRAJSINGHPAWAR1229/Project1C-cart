@@ -15,8 +15,8 @@ const Header = () => {
 
   
 
-  console.log(cartItems);
-  console.log(userInfo);
+  // console.log(cartItems);
+  // console.log(userInfo);
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const [logoutApiCall]=useLogoutMutation();
