@@ -1,6 +1,7 @@
 import {apiSlice} from './apiSlice'
 import { ORDERS_URL, PAYPAL_URL } from '../constants'
 
+
 export const ordersApiSlice=apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         createOrder: builder.mutation({
@@ -35,7 +36,15 @@ export const ordersApiSlice=apiSlice.injectEndpoints({
                 method:'GET'
             }),
             keepUnusedDataFor:5,
-         }),       
+         }),  
+         getAllOrders:builder.query({
+            query:()=>({
+                url:`${ORDERS_URL}/admin/orderList`,
+                method:'GET'
+            }),
+            keepUnusedDataFor:5,
+            
+         }),     
         }),
 
 

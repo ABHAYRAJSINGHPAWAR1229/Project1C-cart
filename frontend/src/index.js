@@ -24,6 +24,9 @@ import PrivateRoute from './Component/PrivateRoute';
 import PlaceOrderScreen from './Screen/PlaceOrderScreen';
 import ProfileScreen from './Screen/ProfileScreen';
 
+import AdminRoute from './Component/AdminRoute';
+import OrderListScreen from './Screen/OrderListScreen';
+
 const router=createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
@@ -40,6 +43,11 @@ const router=createBrowserRouter(
        <Route path='/placeOrder' element={<PlaceOrderScreen/>}/>
        <Route path='/users/profile' element={<ProfileScreen/>} />
        <Route path='/order/:id' element={<OrderScreen/>} />
+       </Route>
+
+       <Route path='' element={<AdminRoute/>}>
+       <Route path='/admin/orderList' element={<OrderListScreen/>}/>
+     
        </Route>
     </Route>
   )

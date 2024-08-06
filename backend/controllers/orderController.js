@@ -45,7 +45,7 @@ const getMyOrders=asyncHandler(async(req,res)=>{
 //get http://localhost:3000/orders/:id
 //private
 const getOrderById=asyncHandler(async(req,res)=>{
-  
+     console.log(req.query.id)
      const order=await Order.findById(req.params.id).populate('user','name email')
      res.status(200).json({success:true,order:order});
 

@@ -155,10 +155,12 @@ const ProfileScreen = () => {
                       <Row>
                       <Col md={2} style={{backgroundColor:'gold' }}>ID</Col>
                       <Col md={2}  style={{backgroundColor:'lightyellow' }}>Ordered Date</Col>
-                      <Col md={2} style={{backgroundColor:'lightgoldenrodyellow' }}>Total</Col>
-                      <Col md={1} style={{backgroundColor:'lightgoldenrodyellow' }}>Payment Method</Col>
-                      <Col md={2} style={{backgroundColor:'lightyellow' }} >PAID</Col>
-                      <Col md={2} style={{backgroundColor:'gold' }}>Delivered</Col>
+                      <Col md={1} style={{backgroundColor:'lightgoldenrodyellow' }}>Total</Col>
+                      <Col md={1} style={{backgroundColor:'lightyellow' }}>Payment Method</Col>
+                      <Col md={2} style={{backgroundColor:'lightgoldenrodyellow' }} >PAID</Col>
+                      <Col md={2} style={{backgroundColor:'lightyellow' }}>Delivered</Col>
+                      
+                      <Col md={2} style={{backgroundColor:'gold' }}>Order Details</Col>
                       </Row>
                     </ListGroup>
                     <ListGroup style={{backgroundColor:'lightgoldenrodyellow' }}>
@@ -168,11 +170,16 @@ const ProfileScreen = () => {
                     <tr ><Row >   
                       {/* <Col><td>{sn}</td></Col>               */}
                       <Col md={2} style={{backgroundColor:'gold' }}><td > {order._id}</td></Col>
-                      <Col md={2} style={{backgroundColor:'lightyellow' }}><td> {order.createdAt}</td></Col>
-                      <Col md={2} style={{backgroundColor:'lightgoldenrodyellow' }}><td> {order.totalDebtingAmount}</td></Col>
-                      <Col md={1} style={{backgroundColor:'lightgoldenrodyellow' }}><td>{order.paymentMethod}</td></Col>
-                      <Col md={2} style={{backgroundColor:'lightyellow' }}><td> {order.isPaid?<Alerting variant='success'>Paid</Alerting>:<Alerting variant='danger'>Not Paid</Alerting>}</td></Col>
-                      <Col md={2} style={{backgroundColor:'gold' }}><td> {order.isDelivered?<Alerting variant='success'>Delivered</Alerting>:<Alerting variant='danger'>Not Delivered</Alerting>}</td></Col>
+                      <Col md={2} style={{backgroundColor:'lightyellow' }}><td> {order.createdAt.substring(0,10)}</td></Col>
+                      <Col md={1} style={{backgroundColor:'lightgoldenrodyellow' }}><td> {order.totalDebtingAmount}</td></Col>
+                      <Col md={1} style={{backgroundColor:'lightyellow' }}><td>{order.paymentMethod}</td></Col>
+                      <Col md={2} style={{backgroundColor:'lightgoldenrodyellow' }}><td> {order.isPaid?<Alerting variant='success'>Paid</Alerting>:<Alerting variant='danger'>Not Paid</Alerting>}</td></Col>
+                      <Col md={2} style={{backgroundColor:'lightyellow' }}><td> {order.isDelivered?<Alerting variant='success'>Delivered</Alerting>:<Alerting variant='danger'>Not Delivered</Alerting>}</td></Col>
+                      <Col md={2} style={{backgroundColor:'gold' }}><td> 
+                        <LinkContainer to={`/order/${order._id}`}>
+                        <Button> Details</Button>
+                        </LinkContainer>
+                        </td></Col>
                       </Row>
 
                     </tr>
