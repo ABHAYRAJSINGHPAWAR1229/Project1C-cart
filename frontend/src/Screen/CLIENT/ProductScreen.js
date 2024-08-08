@@ -4,11 +4,11 @@ import {Row,Card, Button, Col, ListGroup, ListGroupItem, FormControl} from 'reac
 import {LinkContainer} from 'react-router-bootstrap'
 // import axios from 'axios'
 import { useDispatch } from 'react-redux'
-import Rating from '../Component/Rating'
-import { useGetProductDetailsQuery } from '../slices/productsApiSlice'
-import Spin from '../Component/Spinner'
-import Alerting from '../Component/Alerting'
-import {addToCart} from '../slices/cartSlice'
+import Rating from '../../Component/Rating'
+import { useGetProductDetailsQuery } from '../../slices/productsApiSlice'
+import Spin from '../../Component/Spinner'
+import Alerting from '../../Component/Alerting'
+import {addToCart} from '../../slices/cartSlice'
 
 const ProductScreen = () => {
     const {id:productId} = useParams();

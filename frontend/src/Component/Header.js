@@ -1,7 +1,7 @@
 import React from 'react'
 import {LinkContainer} from 'react-router-bootstrap'
 import {Navbar,Nav,NavLink,Container, Badge, NavDropdown} from 'react-bootstrap'
-import {FaUser,FaShoppingCart,FaBaby} from 'react-icons/fa'
+import {FaUser,FaShoppingCart,FaBaby,FaShoppingBag, FaUserFriends,  FaProductHunt, FaPhone, FaPhoneAlt} from 'react-icons/fa'
 import {useSelector,useDispatch} from 'react-redux'
 import { useLogoutMutation } from '../slices/userApiSlice'
 import { logout } from '../slices/loginSlice'
@@ -60,6 +60,10 @@ const Header = () => {
                         Logout
                       </NavDropdown.Item>
                     </NavDropdown>
+                     
+                     
+                     
+                    
                   ):(
                     <>
                     <LinkContainer to='/users/login'>
@@ -71,7 +75,23 @@ const Header = () => {
                      </LinkContainer>
                     </>
                     )}
-                      
+
+                     {userInfo && userInfo.isAdmin && (
+                      <NavDropdown title='Admin'>
+                        <LinkContainer to='/admin/orderList'>
+                              <NavLink ><FaShoppingBag/> Orders</NavLink>
+                        </LinkContainer>
+
+                        <LinkContainer to='/admin/productList'>
+                              <NavLink ><FaProductHunt/> Products</NavLink>
+                        </LinkContainer>
+
+                        <LinkContainer to='/admin/userList'>
+                              <NavLink ><FaUserFriends/> Users</NavLink>
+                        </LinkContainer>
+
+                      </NavDropdown>
+                     )} 
 
                      
                 
@@ -82,6 +102,10 @@ const Header = () => {
                         </Badge>)}
                         </NavLink>
                         </LinkContainer>
+
+                        <LinkContainer to='/help'>
+                      <NavLink ><FaPhoneAlt/>Help</NavLink>
+                     </LinkContainer>
                 </Nav>
             </Navbar.Collapse>
         </Container>

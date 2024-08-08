@@ -10,22 +10,25 @@ export const usersApiSlice=apiSlice.injectEndpoints({
                 url:USERS_URL+`/login`,
                 method:'POST',
                 body:data,
-                }),
-               
+                }),   
             }),
+
             logout:builder.mutation({
                 query:()=>({
                     url:`${USERS_URL}/logout`,
                     method:'POST',
                     }),
-            }),register:builder.mutation({
+            }),
+
+            register:builder.mutation({
                 query:(data)=>({
                     url:USERS_URL
                     ,method:'POST',
                     body:data,
     
-            })
+            }),
         }),
+
         profile:builder.mutation({
             query:(data)=>({
                 url:USERS_URL+`/profile`,
@@ -33,9 +36,21 @@ export const usersApiSlice=apiSlice.injectEndpoints({
                 body:data,
             }),
         }),
+
+        getAllUsers:builder.query({
+            query:()=>({
+                url:USERS_URL,
+                method:'GET',
+            }),
+        }),
         }),
         
 
 });
 
-export const {useLoginMutation,useLogoutMutation,useRegisterMutation,useProfileMutation}=usersApiSlice
+export const {useLoginMutation,
+              useLogoutMutation,
+              useRegisterMutation,
+              useProfileMutation,
+              useGetAllUsersQuery
+            }=usersApiSlice

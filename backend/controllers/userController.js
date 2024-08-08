@@ -37,6 +37,10 @@ const authUser=asyncHandler(async(req,res)=>{
         email:user.email,
         contactNumber:user.contactNumber,
         address:user.address,
+        city:user.city,
+        postalCode:user.postalCode,
+        state:user.state,
+        country:user.country,
         isAdmin:user.isAdmin,
 
     });
@@ -191,8 +195,10 @@ const registerUser=asyncHandler(async(req,res)=>{
                 //get all users
                 //GET localhost:port/users/
                 //Access private/Admin
-        const getUsers=asyncHandler(async(req,res)=>{
-            res.send("get all users");
+        const getAllUsers=asyncHandler(async(req,res)=>{
+            const user=await User.find();
+            console.log(user)
+            res.send(user);
        });
 
                 //delete user
@@ -223,7 +229,7 @@ const registerUser=asyncHandler(async(req,res)=>{
                     logoutUser,
                     getUserProfile,
                     updateUserProfile,
-                    getUsers,
+                    getAllUsers,
                     deleteUser,
                     getUserById,
                     updateUser

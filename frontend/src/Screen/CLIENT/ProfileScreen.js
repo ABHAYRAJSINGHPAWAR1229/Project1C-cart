@@ -3,13 +3,13 @@ import {Table,Form,Row,Col, Card, ListGroup, Button} from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import {useDispatch,useSelector} from 'react-redux'
 import {toast,ToastContainer} from 'react-toastify'
-import Alerting from '../Component/Alerting'
-import Spinner from '../Component/Spinner'
-import { useProfileMutation } from '../slices/userApiSlice'
-import { setCredentials } from '../slices/loginSlice'
+import Alerting from '../../Component/Alerting'
+import Spinner from '../../Component/Spinner'
+import { useProfileMutation } from '../../slices/userApiSlice'
+import { setCredentials } from '../../slices/loginSlice'
 import { useNavigate } from 'react-router-dom'
 import bcrypt from 'bcryptjs'
-import { useGetMyOrdersQuery } from '../slices/orderApiSlice'
+import { useGetMyOrdersQuery } from '../../slices/orderApiSlice'
 
 const ProfileScreen = () => {
     const {userInfo}=useSelector((state)=>(state.login))
@@ -166,7 +166,7 @@ const ProfileScreen = () => {
                     <ListGroup style={{backgroundColor:'lightgoldenrodyellow' }}>
                       <Table >
                         
-                    {orders.map((order) => (  
+                    {orders && orders.map((order) => (  
                     <tr ><Row >   
                       {/* <Col><td>{sn}</td></Col>               */}
                       <Col md={2} style={{backgroundColor:'gold' }}><td > {order._id}</td></Col>
@@ -176,7 +176,7 @@ const ProfileScreen = () => {
                       <Col md={2} style={{backgroundColor:'lightgoldenrodyellow' }}><td> {order.isPaid?<Alerting variant='success'>Paid</Alerting>:<Alerting variant='danger'>Not Paid</Alerting>}</td></Col>
                       <Col md={2} style={{backgroundColor:'lightyellow' }}><td> {order.isDelivered?<Alerting variant='success'>Delivered</Alerting>:<Alerting variant='danger'>Not Delivered</Alerting>}</td></Col>
                       <Col md={2} style={{backgroundColor:'gold' }}><td> 
-                        <LinkContainer to={`/order/${order._id}`}>
+                        <LinkContainer to={`/orders/${order._id}`}>
                         <Button> Details</Button>
                         </LinkContainer>
                         </td></Col>

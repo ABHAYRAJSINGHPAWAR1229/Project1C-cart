@@ -3,12 +3,12 @@ import {Card, CardBody, CardTitle,Button} from 'react-bootstrap'
 import {Link,useLocation,useNavigate} from 'react-router-dom'
 import {useDispatch,useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-import Spinner from '../Component/Spinner'
-import {useLoginMutation} from '../slices/userApiSlice'
-import {setCredentials} from '../slices/loginSlice'
+import Spinner from '../../Component/Spinner'
+import {useLoginMutation} from '../../slices/userApiSlice'
+import {setCredentials} from '../../slices/loginSlice'
 import {toast,ToastContainer} from 'react-toastify'
 import 'react-toastify/ReactToastify.min.css'
-import CheckOutSteps from '../Component/CheckOutSteps'
+import CheckOutSteps from '../../Component/CheckOutSteps'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')

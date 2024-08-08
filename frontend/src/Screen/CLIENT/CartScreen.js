@@ -5,8 +5,8 @@ import {Image, Button,Card, CardTitle,FormControl, ListGroup, Row ,Col} from 're
 import { useDispatch,useSelector} from 'react-redux'
 import { FaTrash } from 'react-icons/fa'
 import {Table} from 'react-bootstrap'
-import { addToCart,removeCartItems } from '../slices/cartSlice'
-import CheckOutSteps from '../Component/CheckOutSteps'
+import { addToCart,removeCartItems } from '../../slices/cartSlice'
+import CheckOutSteps from '../../Component/CheckOutSteps'
 
 
 const CartScreen = () => {

@@ -1,37 +1,47 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect} from 'react'
 import {PayPalButtons,usePayPalScriptReducer} from '@paypal/react-paypal-js'
-import { usePayOrderMutation,useGetPayPalClientQuery } from '../slices/orderApiSlice'
+import { usePayOrderMutation,useGetPayPalClientQuery } from '../../slices/orderApiSlice'
 import {toast ,ToastContainer} from 'react-toastify'
-import {useNavigate} from 'react-router-dom'
 import {useSelector} from 'react-redux'
-import CheckOutSteps from '../Component/CheckOutSteps'
-import { Link ,useParams} from 'react-router-dom'
-import Alerting from '../Component/Alerting'
-import { Card,Row,Col,ListGroup,Image,Form,Button, CardBody } from 'react-bootstrap'
-import Spinner from '../Component/Spinner'
-import {useGetOrderDetailsQuery } from '../slices/orderApiSlice'
-import Spin from '../Component/Spinner'
+import CheckOutSteps from '../../Component/CheckOutSteps'
+import { useParams} from 'react-router-dom'
+import Alerting from '../../Component/Alerting'
+import { Card,Row,Col,ListGroup,Button, CardBody } from 'react-bootstrap'
+import Spinner from '../../Component/Spinner'
+import {useGetOrderDetailsQuery,useDeliverOrderMutation} from '../../slices/orderApiSlice'
+import { LinkContainer } from 'react-router-bootstrap'
+
 
 const OrderScreen = () => {
     const {id:orderId} = useParams()
-    console.log(orderId)
+    // console.log(orderId)
     const { data:ord,refetch,isLoading,error} = useGetOrderDetailsQuery(orderId)
     const [payOrder,{isLoading:loadingPayOrder,error:errorPayOrder}]=usePayOrderMutation();
     const [{isPending},paypalDispatch]=usePayPalScriptReducer();
+    
     const {userInfo} =useSelector((state)=>state.login);
+    // console.log(userInfo)
     const {data:paypal ,isLoading:loadingPayPal,error:errorPayPal}=useGetPayPalClientQuery()
-    const navigate=useNavigate()
+    
+    const [delivery,{isLoading:loadingDelivery,error:errorDelivery}]=useDeliverOrderMutation(); 
+
     // // const newl =useState(ord.order.isPaid)
     // console.log(userInfo)
     // console.log(ord.order.isPaid)
     
-     console.log(ord)
+    //  console.log(ord)
     // console.log({newl}+"u")
    
     const onApproveTest=async()=>{
         await payOrder({orderId,details:{payer:{}}})
         refetch();
         toast.success('Payment Successfull')
+    }
+
+    const onApproveDeliveryTest=async()=>{
+        await delivery({orderId,details:{payer:{}}})
+        refetch();
+        toast.success('Delivery Successfull')
     }
     
     async function  onApprove(data,Actions){
@@ -89,27 +99,33 @@ const OrderScreen = () => {
         return <Spinner />;
       }
     else if (error) {
-        return <Alerting>Some Problem Occurred</Alerting>;
+        return <Alerting>{error?.data?.message || error.message} </Alerting>;
       }
+
+      console.log(ord)
 
   return (
     <>
+      
+      <LinkContainer to='/placeOrder'>
+      <Button className='btn-block'>Back</Button>
+    </LinkContainer>
    <ToastContainer/>
       <CheckOutSteps step1 step2 step3 step4 step5 step6 />
       {ord.order.isPaid ? (<Alerting variant='success'>Your Order is Received successfully. Your Order Id number is <u>{orderId}</u></Alerting>):(
         <Alerting variant='info'>Your Payment is not complete.</Alerting>
-      )}
+      )} 
       
       <h1><strong>My Orders</strong></h1>
-      <Row>
+       <Row>
         <Col>
         <Card>
-            <Card.Header> Status</Card.Header>
-            <Card.Body> 
+            <Card.Header className='bg-warning fs-5'> Status</Card.Header>
+            <Card.Body  style={{backgroundColor:'lightgoldenrodyellow' }}> 
                 <Row>
                     <Col>  <strong> Delivery status : </strong> </Col>
                     <Col>
-                   {ord.order.isDelivered ?(<Alerting variant='success'>Delivered on {ord.order.DeliveredAt}</Alerting>)
+                   {ord.order.isDelivered ?(<Alerting variant='success'>Delivered on {ord.order.deliveredAt}</Alerting>)
                    :(<Alerting variant='primary'>Not Delivered Yet</Alerting>)} 
                    </Col>
                 </Row>
@@ -119,20 +135,23 @@ const OrderScreen = () => {
                    :(<Alerting variant='primary'>Not Paid Yet</Alerting>)}
                    </Col>
                    </Row> </Card.Body>
+
+                   {loadingDelivery && <Spinner/>}
         </Card>
         </Col>
         
         {(!ord.order.isPaid)?<>  <Col>
         <Card>
-              <Card.Header>
+              <Card.Header className='bg-warning fs-5'>
                 Payment Gateway
               </Card.Header>
-              <Card.Body>
+              <Card.Body  style={{backgroundColor:'lightgoldenrodyellow' }}>
                 
-                {loadingPayPal && <Spin />}
-                {isPending ? <Spin/> :(
+                {loadingPayPal && <Spinner />}
+                {isPending ? <Spinner/> :(
                 <div>
-                    <Button onClick={onApproveTest} style={{marginBottom:'10px'}}>For Testing Payment Successfull</Button>
+
+                    
                     <PayPalButtons  paytOrder={paytOrder} onApprove={onApprove} onError={onError} ></PayPalButtons>
                 </div>)}
               </Card.Body>
@@ -140,22 +159,36 @@ const OrderScreen = () => {
         </Col></>:<></>
 
         }
-      
-      </Row>
+        {userInfo.isAdmin?(
+            <Card  style={{backgroundColor:'lightgoldenrodyellow' }}>
+            <Card.Header className='bg-warning fs-5'>
+                Testing Purpose
+            </Card.Header>
+            <CardBody  style={{backgroundColor:'lightgoldenrodyellow' }}>
+           <Row> <Button onClick={onApproveTest} style={{marginBottom:'10px'}}>For Testing Payment Successfull</Button></Row>
+            <Row><Button onClick={onApproveDeliveryTest} style={{marginBottom:'10px'}}>For Testing Delivery Successfull</Button></Row>
+            </CardBody>
+
+            </Card>
+            ):(<></>)}
+      </Row> 
+       
       <Row>
         <Col md={4}>
           <Card>
-            <Card.Header>Customer details</Card.Header>
-            <Card.Body>
+            <Card.Header className='bg-warning fs-5'>Customer details</Card.Header>
+            <Card.Body  style={{backgroundColor:'gold' }}>
             <ListGroup variant="flush">
-                <ListGroup.Item>
+                <ListGroup.Item  style={{backgroundColor:'lightgoldenrodyellow' }}>
                     <h4>{ord.order.user.name}</h4>
                     <p><strong>Contact No : </strong>{userInfo.contactNumber}</p>
                     <p><strong>Email : </strong> {ord.order.user.email}</p>
                     <p><strong>Address : </strong> {ord.order.shippingAddress.address}</p>
-                    <p><strong>City : </strong></p>
-                    <p><strong>PinCode : </strong></p>
-                    <p><strong>State : </strong></p>
+                    <p><strong>City : </strong> {userInfo.city}</p>
+                    <p><strong>PinCode : </strong> {userInfo.postalCode}</p>
+                    <p><strong>State : </strong>{userInfo.state}</p>
+                    <p><strong>Country : </strong>{userInfo.country}</p>
+                    
                     
                 </ListGroup.Item>
             </ListGroup>
@@ -165,11 +198,11 @@ const OrderScreen = () => {
         
         <Col md={4}>
         <Card>
-            <Card.Header>Parcel details</Card.Header>
-            <Card.Body>
+            <Card.Header className='bg-warning fs-5'>Parcel details</Card.Header>
+            <Card.Body style={{backgroundColor:'gold' }}>
             <ListGroup variant="flush">
                 {ord.order.orderItems.map((tem)=>(
-                    <ListGroup.Item key={tem._id}>
+                    <ListGroup.Item key={tem._id}  style={{backgroundColor:'lightgoldenrodyellow' }}>
                         <h4>Product Name : {tem.name}</h4>
                         <p><strong>Price : &#8377; </strong>{tem.price}</p>
                         <p><strong>Quantity : </strong>{tem.qty}</p>
@@ -185,16 +218,16 @@ const OrderScreen = () => {
         <Col>
       
         <Card>
-            <Card.Header>Shipping details</Card.Header>
-            <CardBody>
+            <Card.Header className='bg-warning fs-5'>Shipping details</Card.Header>
+            <CardBody style={{backgroundColor:'gold' }}>
                 <ListGroup>
-                    <ListGroup.Item>
+                    <ListGroup.Item  style={{backgroundColor:'lightgoldenrodyellow' }}>
                         <p><strong>Amount : </strong>{ord.order.totalAmount} </p>
                         <p><strong>Gst : </strong>{ord.order.totalGst}</p>
                         <p><strong>Shipping : </strong>{ord.order.totalShipping}</p>
                        
                     </ListGroup.Item>
-                    <ListGroup.Item>
+                    <ListGroup.Item  style={{backgroundColor:'lightgoldenrodyellow' }}>
                     <p><strong>Total Payable Amount :</strong>{ord.order.totalDebtingAmount}</p>
                     </ListGroup.Item>
                 </ListGroup>

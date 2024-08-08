@@ -2,12 +2,13 @@ import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {Button,Row ,Col,ListGroup,Card} from 'react-bootstrap'
-import CheckOutSteps from '../Component/CheckOutSteps'
+import CheckOutSteps from '../../Component/CheckOutSteps'
 import { toast } from 'react-toastify';
-import Alerting from '../Component/Alerting'
-import Spinner from '../Component/Spinner'
-import { useCreateOrderMutation } from '../slices/orderApiSlice'
-import { clearCartItems } from '../slices/cartSlice';
+import Alerting from '../../Component/Alerting'
+import Spinner from '../../Component/Spinner'
+import { useCreateOrderMutation } from '../../slices/orderApiSlice'
+import { clearCartItems } from '../../slices/cartSlice';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const PlaceOrderScreen=()=>{
   const navigate=useNavigate();
@@ -26,8 +27,8 @@ const PlaceOrderScreen=()=>{
           totalGst:cart.totalGst,
           totalDebtingAmount:cart.totalDebitingAmount
          }).unwrap();
-        //  dispatch(clearCartItems());
-         navigate(`/order/${orderCre._id}`);
+          dispatch(clearCartItems());
+         navigate(`/orders/${orderCre._id}`);
     }catch(error){
       console.error(error); // Log the error to see its structure
       const errorMessage = error?.data?.message || error.message || 'An unexpected error occurred';
@@ -46,8 +47,12 @@ const PlaceOrderScreen=()=>{
   },[cart.paymentMethod,cart.shippingAddress.address,navigate])
   return (
   <>
+   <LinkContainer to='/payment'>
+      <Button className='btn-block'>Back</Button>
+    </LinkContainer>
+
 <h1>Place Order screen</h1>
-<CheckOutSteps step1 step2 step3 step4/>
+<CheckOutSteps step1 step2 step3 step4 step5/>
   <Row>
     <Col md={8}>
     <ListGroup variant='flush'>
@@ -67,22 +72,22 @@ const PlaceOrderScreen=()=>{
     
     <ListGroup.Item>
       <Card>
-      <Card.Header as="h5">Order Items</Card.Header>
-      <Card.Body>
+      <Card.Header as="h5" className='bg-warning fs-5'>Order Items</Card.Header>
+      <Card.Body style={{backgroundColor:'gold' }} >
         {cart.cartItems.length===0?(
           <Alerting>Your cart is Empty</Alerting>
         ):( <>
-          <ListGroup variant='flush'>
-          <ListGroup.Item >
+          <ListGroup  >
+          <ListGroup.Item  style={{backgroundColor:'lightgoldenrodyellow' }}>
                   <Col >
                   <Row >
-                    <Col>
+                    <Col >
                         <strong>Image</strong> 
                     </Col>
-                    <Col>
+                    <Col >
                     <strong>   Name   </strong> 
                     </Col>
-                    <Col>
+                    <Col >
                     <strong> Price </strong> 
                     </Col>
                     <Col>
@@ -96,12 +101,12 @@ const PlaceOrderScreen=()=>{
                   </Col>
 
                  
-                </ListGroup.Item>
+                </ListGroup.Item >
             {cart.cartItems.map((item,index)=>{
-              console.log(index +"hi");
-              console.log(item.name);
+              // console.log(index +"hi");
+              // console.log(item.name);
               return (
-                <ListGroup.Item key={index} >
+                <ListGroup.Item key={index}  style={{backgroundColor:'lightgoldenrodyellow' }}>
                   <Col >
                   <Row >
                     <Col>
@@ -136,10 +141,10 @@ const PlaceOrderScreen=()=>{
 
     </ListGroup>
      </Col>
-    <Col md={4}>
+    <Col md={4} >
     <Card>
-      <Card.Header as="h5">Order Summary</Card.Header>
-      <Card.Body>
+      <Card.Header as="h5" className='bg-warning fs-5'>Order Summary</Card.Header>
+      <Card.Body  style={{backgroundColor:'lightgoldenrodyellow' }}>
       <Row>
       <Col><strong>Method :</strong></Col>
       <Col>{cart.paymentMethod}</Col>

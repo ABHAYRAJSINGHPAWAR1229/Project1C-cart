@@ -11,21 +11,23 @@ import {createBrowserRouter,
         RouterProvider
 } from 'react-router-dom'
 import {PayPalScriptProvider} from '@paypal/react-paypal-js'
-import HomeScreen from './Screen/HomeScreen';
-import ProductScreen from './Screen/ProductScreen';
-import LoginScreen from './Screen/LoginScreen';
-import CartScreen from './Screen/CartScreen';
-import LogoutScreen from './Screen/LogoutScreen'
-import RegistrationScreen from './Screen/RegistrationScreen';
-import ShippingScreen from './Screen/ShippingScreen';
-import PaymentScreen from './Screen/PaymentScreen';
-import OrderScreen from './Screen/OrderScreen';
+import HomeScreen from './Screen/CLIENT/HomeScreen';
+import ProductScreen from './Screen/CLIENT/ProductScreen';
+import LoginScreen from './Screen/CLIENT/LoginScreen';
+import CartScreen from './Screen/CLIENT/CartScreen';
+import RegistrationScreen from './Screen/CLIENT/RegistrationScreen';
+import ShippingScreen from './Screen/CLIENT/ShippingScreen';
+import PaymentScreen from './Screen/CLIENT/PaymentScreen';
+import OrderScreen from './Screen/CLIENT/OrderScreen';
 import PrivateRoute from './Component/PrivateRoute';
-import PlaceOrderScreen from './Screen/PlaceOrderScreen';
-import ProfileScreen from './Screen/ProfileScreen';
+import PlaceOrderScreen from './Screen/CLIENT/PlaceOrderScreen';
+import ProfileScreen from './Screen/CLIENT/ProfileScreen';
 
 import AdminRoute from './Component/AdminRoute';
-import OrderListScreen from './Screen/OrderListScreen';
+import OrderListScreen from './Screen/ADMIN/OrderListScreen';
+import ProductListScreen from './Screen/ADMIN/ProductListScreen';
+import UserListScreen from './Screen/ADMIN/UserListScreen';
+import HelpScreen from './Screen/CLIENT/HelpScreen';
 
 const router=createBrowserRouter(
   createRoutesFromElements(
@@ -34,19 +36,22 @@ const router=createBrowserRouter(
        <Route path='/products/:id' element={<ProductScreen/>} />
        <Route path='/users/login' element={<LoginScreen/>} />
        <Route path='/cart' element={<CartScreen/>} />
-       <Route path='/logout' element={<LogoutScreen/>}/>
        <Route path='/register' element={<RegistrationScreen/>}/>
+       <Route path='/help' element={<HelpScreen/>}/>
+       
 
        <Route path='' element={<PrivateRoute/>}>
        <Route path='/shipping' element={<ShippingScreen/>}/>
        <Route path='/payment' element={<PaymentScreen/>}/>
        <Route path='/placeOrder' element={<PlaceOrderScreen/>}/>
        <Route path='/users/profile' element={<ProfileScreen/>} />
-       <Route path='/order/:id' element={<OrderScreen/>} />
+       <Route path='/orders/:id' element={<OrderScreen/>} />
        </Route>
 
        <Route path='' element={<AdminRoute/>}>
        <Route path='/admin/orderList' element={<OrderListScreen/>}/>
+       <Route path='/admin/productList' element={<ProductListScreen/>}/>
+       <Route path='/admin/userList' element={<UserListScreen/>}/>
      
        </Route>
     </Route>

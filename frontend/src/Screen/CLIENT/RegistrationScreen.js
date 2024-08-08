@@ -1,13 +1,13 @@
 import { useState,useEffect } from 'react'
-import { useRegisterMutation } from '../slices/userApiSlice'
+import { useRegisterMutation } from '../../slices/userApiSlice'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Card,Button, } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { setCredentials } from '../slices/loginSlice'
+import { setCredentials } from '../../slices/loginSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast ,ToastContainer} from 'react-toastify'
 import 'react-toastify/ReactToastify.min.css'
-import Spinner from '../Component/Spinner'
+import Spinner from '../../Component/Spinner'
 
 
 const RegistrationScreen = () => {

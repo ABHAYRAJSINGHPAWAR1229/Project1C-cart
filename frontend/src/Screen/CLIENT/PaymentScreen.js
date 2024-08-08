@@ -1,10 +1,10 @@
 import React,{useEffect, useState} from 'react'
 import { Form,Button, Card } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import CheckOutSteps from '../Component/CheckOutSteps'
+import CheckOutSteps from '../../Component/CheckOutSteps'
 import { useDispatch, useSelector} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-import { savePaymentMethod } from '../slices/cartSlice'
+import { savePaymentMethod } from '../../slices/cartSlice'
 
 const PaymentScreen = () => {
     const [paymentMethod,setPaymentMethod] = useState('PayPal')
@@ -27,7 +27,7 @@ const PaymentScreen = () => {
     }
   return (
     <>
-    <LinkContainer to='/'>
+    <LinkContainer to='/shipping'>
       <Button className='btn-block'>Back</Button>
     </LinkContainer>
     

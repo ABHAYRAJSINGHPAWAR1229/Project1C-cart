@@ -1,11 +1,11 @@
 import React from 'react'
-import Spin from '../Component/Spinner'
+import Spin from '../../Component/Spinner'
 import {Row,Col} from 'react-bootstrap'
 // import axios from 'axios'
-import Product from '../Component/Product'
+import Product from '../../Component/Product'
 //from redux toolkit
-import { useGetProductsQuery } from '../slices/productsApiSlice'
-import Alerting from '../Component/Alerting'
+import { useGetProductsQuery } from '../../slices/productsApiSlice'
+import Alerting from '../../Component/Alerting'
 import { Link } from 'react-router-dom'
 
 
