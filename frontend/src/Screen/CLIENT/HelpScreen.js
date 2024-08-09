@@ -9,10 +9,10 @@ const HelpScreen = () => {
             <Card.Header className='bg-warning fs-5'>Help</Card.Header>
             <Card.Body>
                 <ListGroup >
-                    <ListGroup.Item style={{backgroundColor:'lightyellow' }}>Toll Free Contact Number : 180017352010 </ListGroup.Item>
-                    <ListGroup.Item style={{backgroundColor:'lightyellow' }}>For Technical Support    : +918737801229 </ListGroup.Item>
+                    <ListGroup.Item style={{backgroundColor:'lightyellow' }}><h4>Toll Free Contact Number : </h4> 180017352010 </ListGroup.Item>
+                    <ListGroup.Item style={{backgroundColor:'lightyellow' }}><h4>For Technical Support    : </h4>+918737801229 </ListGroup.Item>
                     
-                    <ListGroup.Item style={{backgroundColor:'lightyellow' }}>Email : abhayrajsinghpawar.cdac@gmail.com</ListGroup.Item>
+                    <ListGroup.Item style={{backgroundColor:'lightyellow' }}><h4>Email : </h4>abhayrajsinghpawar.cdac@gmail.com</ListGroup.Item>
                 </ListGroup>
             </Card.Body>
         </Card>
