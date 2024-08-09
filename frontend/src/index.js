@@ -28,6 +28,7 @@ import OrderListScreen from './Screen/ADMIN/OrderListScreen';
 import ProductListScreen from './Screen/ADMIN/ProductListScreen';
 import UserListScreen from './Screen/ADMIN/UserListScreen';
 import HelpScreen from './Screen/CLIENT/HelpScreen';
+import Error404Screen from './Screen/CLIENT/Error404Screen';
 
 const router=createBrowserRouter(
   createRoutesFromElements(
@@ -38,6 +39,7 @@ const router=createBrowserRouter(
        <Route path='/cart' element={<CartScreen/>} />
        <Route path='/register' element={<RegistrationScreen/>}/>
        <Route path='/help' element={<HelpScreen/>}/>
+       <Route path='*' element={<Error404Screen/>}/>
        
 
        <Route path='' element={<PrivateRoute/>}>
