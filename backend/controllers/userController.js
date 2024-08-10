@@ -36,6 +36,7 @@ const authUser=asyncHandler(async(req,res)=>{
         name:user.name,
         email:user.email,
         contactNumber:user.contactNumber,
+        addharNumber:user.addharNumber,
         address:user.address,
         city:user.city,
         postalCode:user.postalCode,
@@ -55,7 +56,7 @@ const authUser=asyncHandler(async(req,res)=>{
 //POST http://localhost:port/users/register
 //Access public
 const registerUser=asyncHandler(async(req,res)=>{
-    const {name,email,password,addharNumber,contactNumber,address}=req.body;
+    const {name,email,password,addharNumber,contactNumber,address,city,postalCode,state,country}=req.body;
     const userExist=await User.findOne({email});
     if(userExist){
         res.status(400);
@@ -68,6 +69,10 @@ const registerUser=asyncHandler(async(req,res)=>{
             addharNumber,
             contactNumber,
             address,
+            city,
+            postalCode,
+            state,
+            country,
             });
 
             if(user){
@@ -76,8 +81,13 @@ const registerUser=asyncHandler(async(req,res)=>{
                     _id:user._id,
                     name:user.name,
                     email:user.email,
+                    addharNumber:user.addharNumber,
                     contactNumber:user.contactNumber,
                     address:user.address,
+                    city:user.city,
+                    postalCode:user.postalCode,
+                    state:user.state,
+                    country:user.country,
                     isAdmin:user.isAdmin,
                     status:"registered"
                     });
@@ -167,23 +177,40 @@ const registerUser=asyncHandler(async(req,res)=>{
      const updateUserProfile=asyncHandler(async(req,res)=>{
         //   res.send("update user profile");
         // console.log(req.body._id +"check");
-        const {name,email,password,addharNumber,contactNumber,address}=req.body;
+        const {_id,name,email,password,addharNumber,contactNumber,address,city,state,postalCode,country}=req.body;
         
-         const userExist=await User.findById(req.body._id);
-        //  console.log(userExist)
+         const userExist=await User.findById(_id);
+          console.log(_id+"check")
         if(userExist){
 
                 
-                const userExist=await User.updateOne({
-                    name,
+                const updateUser=await User.updateOne({_id:req.body._id},{
+                   $set:{ name,
                     email,
                     password,
                     addharNumber,
                     contactNumber,
                     address,
-                    })
+                    city,
+                    state,
+                    postalCode,
+                    country,
+        },})
 
-                    console.log("updated")
+                    console.log("updated");
+                    const userExist=await User.findById(_id);
+                    res.status(200).json({ _id:userExist._id,
+                        name:userExist.name,
+                        email:userExist.email,
+                        addharNumber:userExist.addharNumber,
+                        contactNumber:userExist.contactNumber,
+                        address:userExist.address,
+                        city:updateUser.city,
+                        postalCode:userExist.postalCode,
+                        state:userExist.state,
+                        country:userExist.country,
+                        isAdmin:userExist.isAdmin,
+                        status:"updated"})
             
         }else{
             res.status(404);

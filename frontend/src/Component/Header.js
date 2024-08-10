@@ -52,7 +52,7 @@ const Header = () => {
                     <SearchBox/>
 {/* //registration time it give userInfo.data.name */}
                   {userInfo?(
-                    <NavDropdown title={userInfo.name} id='name'>
+                    <NavDropdown title={userInfo?.name || userInfo?.data?.name } id='name'>
                       <LinkContainer to='/users/profile'>
                       <NavDropdown.Item>Profile</NavDropdown.Item>
                       </LinkContainer>

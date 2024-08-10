@@ -18,6 +18,10 @@ const RegistrationScreen = () => {
    const [addharNumber,setAddhar]=useState('')
    const [contactNumber,setContactNo]=useState('')
    const [address,setAddress]=useState('')
+   const [city,setCity]=useState('')
+   const [state,setState]=useState('')
+   const [postalCode,setPostalCode]=useState('')
+   const [country,setCountry] =useState('')
    const [register,{isLoading}] = useRegisterMutation()
 
    const dispatch =useDispatch();
@@ -40,7 +44,7 @@ const submitHandler=async(e)=>{
     }
     else{
     try{
-      const res = await register({name,email,password,addharNumber,contactNumber,address})
+      const res = await register({name,email,password,addharNumber,contactNumber,address,city,state,postalCode,country})
       dispatch(setCredentials({...res}))
       navigate(redirect)
       }catch(error){
@@ -112,6 +116,26 @@ const resetHandler=async(e)=>{
   <div className="mb-3">
     <label for="address" className="form-label"><b>Full Address</b></label>
     <textarea className="form-control" id="address" value={address} placeholder='Enter full Address' onChange={(e)=>setAddress(e.target.value)}/>
+  </div>
+
+  <div className="mb-3">
+    <label for="city" className="form-label"><b>City</b></label>
+    <textarea className="form-control" id="city" value={city} placeholder='Enter City' onChange={(e)=>setCity(e.target.value)}/>
+  </div>
+
+  <div className="mb-3">
+    <label for="postalCode" className="form-label"><b>Postal Code</b></label>
+    <textarea className="form-control" id="postalCode" value={postalCode} placeholder='Enter Postal Code' onChange={(e)=>setPostalCode(e.target.value)}/>
+  </div>
+
+  <div className="mb-3">
+    <label for="state" className="form-label"><b>State</b></label>
+    <textarea className="form-control" id="state" value={state} placeholder='Enter full Address' onChange={(e)=>setState(e.target.value)}/>
+  </div>
+
+  <div className="mb-3">
+    <label for="country" className="form-label"><b>Country</b></label>
+    <textarea className="form-control" id="country" value={country} placeholder='Enter full Address' onChange={(e)=>setCountry(e.target.value)}/>
   </div>
 
   <div className="mb-3 form-check">
