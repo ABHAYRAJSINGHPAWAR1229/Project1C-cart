@@ -48,7 +48,7 @@ const OrderListScreen = () => {
               <Col style={{backgroundColor:'lightgoldenrodyellow' }}>{order.isPaid?<Alerting variant='success' >Paid</Alerting>:<Alerting>Not Paid</Alerting>}</Col>
               <Col   style={{backgroundColor:'lightyellow' }}>{order.isDelivered?<Alerting variant='success'>Delivered</Alerting>:<Alerting variant='danger'>Not Delivered</Alerting>}</Col>
               <Col md={1} style={{backgroundColor:'lightgoldenrodyellow' }}><td> 
-                        <LinkContainer to={`/order/${order._id}`}>
+                        <LinkContainer to={`/orders/${order._id}`}>
                         <Button> Details</Button>
                         </LinkContainer>
                         </td></Col>

@@ -159,7 +159,7 @@ const OrderScreen = () => {
         </Col></>:<></>
 
         }
-        {userInfo.isAdmin?(
+        {(userInfo?.isAdmin ||userInfo?.data?.isAdmin) ?(
             <Card  style={{backgroundColor:'lightgoldenrodyellow' }}>
             <Card.Header className='bg-warning fs-5'>
                 Testing Purpose
@@ -181,13 +181,13 @@ const OrderScreen = () => {
             <ListGroup variant="flush">
                 <ListGroup.Item  style={{backgroundColor:'lightgoldenrodyellow' }}>
                     <h4>{ord.order.user.name}</h4>
-                    <p><strong>Contact No : </strong>{userInfo.contactNumber}</p>
+                    <p><strong>Contact No : </strong>{userInfo?.contactNumber || userInfo?.data?.contactNumber}</p>
                     <p><strong>Email : </strong> {ord.order.user.email}</p>
                     <p><strong>Address : </strong> {ord.order.shippingAddress.address}</p>
-                    <p><strong>City : </strong> {userInfo.city}</p>
-                    <p><strong>PinCode : </strong> {userInfo.postalCode}</p>
-                    <p><strong>State : </strong>{userInfo.state}</p>
-                    <p><strong>Country : </strong>{userInfo.country}</p>
+                    <p><strong>City : </strong> {userInfo?.city || userInfo?.data?.city}</p>
+                    <p><strong>PinCode : </strong> {userInfo.postalCode || userInfo?.data?.postalCode}</p>
+                    <p><strong>State : </strong>{userInfo.state || userInfo?.data?.state}</p>
+                    <p><strong>Country : </strong>{userInfo.country || userInfo?.data?.country}</p>
                     
                     
                 </ListGroup.Item>

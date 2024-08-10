@@ -205,7 +205,7 @@ const registerUser=asyncHandler(async(req,res)=>{
                         addharNumber:userExist.addharNumber,
                         contactNumber:userExist.contactNumber,
                         address:userExist.address,
-                        city:updateUser.city,
+                        city:userExist.city,
                         postalCode:userExist.postalCode,
                         state:userExist.state,
                         country:userExist.country,
