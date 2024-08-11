@@ -25,9 +25,20 @@ export const productsApiSlice=apiSlice.injectEndpoints({
                 method:'GET'
                 }),
                 keepUnusedDataFor:5
-        })
+        }),
+        deleteProduct:builder.mutation({
+            query:(productId)=>({
+                url: `${PRODUCTS_URL}/${productId}`,
+                method:'DELETE',
+            }),
+        }),
         }),
 
 });
 
-export const {useGetProductsQuery , useGetProductDetailsQuery,useGetTopProductsQuery}=productsApiSlice
+export const {useGetProductsQuery ,
+     useGetProductDetailsQuery,
+     useGetTopProductsQuery,
+     useDeleteProductMutation,
+
+}=productsApiSlice

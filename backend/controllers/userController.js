@@ -228,18 +228,32 @@ const registerUser=asyncHandler(async(req,res)=>{
             res.send(user);
        });
 
-                //delete user
-                //DELETE localhost:port/users/:id
-                //Access private/Admin
-        const deleteUser=asyncHandler(async(req,res)=>{
-            res.send("delete user");
-        });
+                // //delete user
+                // //DELETE localhost:port/users/:id
+                // //Access private/Admin
+                // const deleteUser = asyncHandler(async (req, res) => {
+                //     const userId = req.params.id; 
+                //     try {
+                //       await User.findByIdAndRemove(userId);
+                //       res.status(200).json({ success: true, status: "removed" });
+                //     } catch (error) {
+                //       console.error(error);
+                //       res.status(500).json({ success: false, status: "error" });
+                //     }
+                //   });
 
                 //get user by Id
                 //GET localhost:port/users/:id
                 //Access private/Admin
        const getUserById=asyncHandler(async(req,res)=>{
-                    res.send("get user by id");
+                    const userId=req.params.id;
+                    try{
+                        const user=await User.findById(userId);
+                        res.status(200).json(user);
+                    }catch{
+                        console.error(error);
+                        res.status(404).json({success:false,status:"User not found"});
+                    }
        })
 
                 //update user
@@ -249,6 +263,21 @@ const registerUser=asyncHandler(async(req,res)=>{
                 const updateUser=asyncHandler(async(req,res)=>{
                     res.send("update user");
                 })
+
+
+                 //get delete User
+// DELETE http://localhost:3000/users/:id
+//access admin
+const deleteUser=asyncHandler(async(req,res)=>{
+    console.log("checking " +req.params.id)
+    const user=await User.findById(req.params.id)
+    if(user){
+        await User.deleteOne({_id:user._id});
+        res.status(200).json({message:"User deleted successfully"})
+        }else{
+            res.status(404).json({message:"User not found"})
+            }
+}  );  
 
                 export {
                     authUser,

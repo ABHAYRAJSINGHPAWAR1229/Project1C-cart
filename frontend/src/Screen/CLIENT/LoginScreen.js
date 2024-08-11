@@ -10,6 +10,7 @@ import {toast,ToastContainer} from 'react-toastify'
 import 'react-toastify/ReactToastify.min.css'
 import CheckOutSteps from '../../Component/CheckOutSteps'
 
+
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -50,7 +51,8 @@ const resetHandler=async(e)=>{
 }
 
   return (
-    <>
+    < >
+    <div className='bg-gr'>
       <div>
             <LinkContainer to='/'>
                 <Button>GO Back</Button>
@@ -82,6 +84,7 @@ const resetHandler=async(e)=>{
         </form>
         </CardBody>
       </Card>
+    </div>
     </div>
     </>
   )

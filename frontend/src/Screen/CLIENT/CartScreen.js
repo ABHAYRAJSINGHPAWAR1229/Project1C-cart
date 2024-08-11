@@ -30,13 +30,15 @@ const CartScreen = () => {
   
   return (
     <>
+    <div className='bg-gr'>
     <LinkContainer to='/'>
-      <Button className='btn-block'>Back</Button>
+      <Button className='btn btn-block'>Back</Button>
     </LinkContainer>
     
     <CheckOutSteps step1 step2/>
-
+    
     <Row>
+    <Col className='col-1'></Col>
       <Col>
     
     <Card style={{width:'600px',backgroundColor:'lightgoldenrodyellow' }} variant='flush'>
@@ -75,16 +77,17 @@ const CartScreen = () => {
     </Card>
     
     </Col>
+    <Col className='col-1'></Col>
     <Col>
     
     <Card  style={{width:'300px',backgroundColor:'lightgoldenrodyellow' }} variant='flush'>
     <CardTitle className='bg-warning' > Subtotal ({cartItems.reduce((acc,item)=>acc+item.qty,0)}) items</CardTitle>
       <ListGroup variant='flush'>
              
-             <ListGroup.Item>
+             <ListGroup.Item style={{backgroundColor:"lightyellow"}}>
             <b> &#8377; </b>{cartItems.reduce((acc,item)=>acc + item.qty * item.price,0)}
              </ListGroup.Item>
-             <ListGroup.Item>
+             <ListGroup.Item style={{backgroundColor:"lightyellow"}}>
               <Button type='button' className='btn-block' disabled={cartItems.length===0} onClick={checkoutHandler}>Proceed To Pay</Button>
              </ListGroup.Item>
       </ListGroup>
@@ -92,6 +95,7 @@ const CartScreen = () => {
     
     </Col>
     </Row>
+    </div>
     </>
   )
 }

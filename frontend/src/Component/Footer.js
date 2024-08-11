@@ -8,7 +8,7 @@ const Footer = () => {
         <Navbar bg='warning' variant='danger' expand='lg' collapseOnSelect >
           <Navbar.Brand>
           <div className=" position-absolute bottom-0 start-50 translate-middle-x">@created by Abhay Raj Singh</div>
-           
+          {/* <div >@created by Abhay Raj Singh</div> */}
           </Navbar.Brand>
         </Navbar>
             {/* <Row>

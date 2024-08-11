@@ -27,12 +27,14 @@ const PaymentScreen = () => {
     }
   return (
     <>
+    <div className='pay-r'>
     <LinkContainer to='/shipping'>
       <Button className='btn-block'>Back</Button>
     </LinkContainer>
     
 
     <CheckOutSteps step1 step2 step3 step4/>
+    <div className='d-flex justify-content-center top-50'>
     <Card style={{width:'400px',height:'400px',backgroundColor:'lightgoldenrodyellow' }}>
         <Card.Title className='bg-warning text-dark'>
             Payment Method
@@ -65,7 +67,8 @@ const PaymentScreen = () => {
             </Form>     
         </Card.Body>
     </Card>
-    
+    </div>
+    </div>
     </>
   )
 }

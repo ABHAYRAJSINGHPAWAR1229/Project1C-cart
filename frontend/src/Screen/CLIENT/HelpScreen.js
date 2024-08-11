@@ -1,11 +1,17 @@
 import React from 'react'
-import { Card, ListGroup } from 'react-bootstrap'
+import { Button, Card, ListGroup } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 
 const HelpScreen = () => {
   return (
-    <div>
-        <h1>Help</h1>
-        <Card style={{backgroundColor:'lightgoldenrodyellow' }}>
+    <div className='bg-gr'>
+      <div>
+        <LinkContainer to='/'>
+      <Button variant='primary' >  <Button variant='info' disabled>HomeScreen</Button>  </Button>
+        </LinkContainer>
+      </div >
+      <div  className='d-flex justify-content-center top-50'>
+        <Card style={{width:'400px',height:'400px',backgroundColor:'lightgoldenrodyellow' }} >
             <Card.Header className='bg-warning fs-5'>Help</Card.Header>
             <Card.Body>
                 <ListGroup >
@@ -16,6 +22,8 @@ const HelpScreen = () => {
                 </ListGroup>
             </Card.Body>
         </Card>
+        </div>
+        <div></div>
     </div>
   )
 }

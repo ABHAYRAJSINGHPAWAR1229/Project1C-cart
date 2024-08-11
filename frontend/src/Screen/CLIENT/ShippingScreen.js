@@ -30,6 +30,7 @@ const ShippingScreen= () => {
 
 return(
    <>
+   <div className='bg-gr'>
     <LinkContainer to='/cart'>
       <Button className='btn-block'>Back</Button>
     </LinkContainer>
@@ -37,15 +38,17 @@ return(
 
     <CheckOutSteps step1 step2 step3/>
 
-    <Card  className='bg-warning fs-5' >
+    <Card   >
+        <Card.Header className='bg-warning fs-5'>
         <Card.Title>
-        <h1>Shipping</h1>
+        Shipping
         </Card.Title>
+        </Card.Header>
         <Card.Body style={{backgroundColor:'lightgoldenrodyellow' }}>
         <Form onSubmit={submitHandler}>
             
             <Form.Group controlId='fullName' >
-                <Form.Label>Full Name</Form.Label>
+                <Form.Label  >Full Name</Form.Label>
                 <Form.Control type='text' placeholder='Enter Full Name' value={userInfo?.name || userInfo?.data?.name} onChange={(
                     e) => setFullName(e.target.value)} style={{backgroundColor:'lightyellow' }}>
                     </Form.Control>
@@ -97,6 +100,7 @@ return(
         </Card.Body>
         
     </Card>
+    </div>
     </>
   )
 }

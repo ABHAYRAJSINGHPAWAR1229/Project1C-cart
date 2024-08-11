@@ -29,7 +29,7 @@ const getProducts=asyncHandler(async(req,res)=>{
 // get single products
 // GET http://localhost:port/product/:id
 //access Public
-const getProductByID=async(req,res)=>{
+const getProductByID=asyncHandler(async(req,res)=>{
     const product=await Product.findById(req.params.id)
 
     if(product){
@@ -38,7 +38,7 @@ const getProductByID=async(req,res)=>{
         res.status(404)
         throw new Error("Product not found")
     }
-}
+})
 
 //get top rated products
 // GET http://localhost:port/products/top
@@ -48,6 +48,21 @@ const getTopProducts=async(req,res)=>{
     res.status(200).json(products)
     }
 
+//get delete product
+// DELETE http://localhost:3000/products/:id
+//access admin
+const deleteProduct=asyncHandler(async(req,res)=>{
+    console.log("in delete product controller");
+    console.log("checking " +req.params.id)
+    const product=await Product.findById(req.params.id)
+    if(product){
+        await Product.deleteOne({_id:product._id});
+        res.status(200).json({message:"Product deleted successfully"})
+        }else{
+            res.status(404).json({message:"Product not found"})
+            }
+}  );  
 
 
-export { getProducts,getProductByID,getTopProducts}
+
+export { getProducts,getProductByID,getTopProducts,deleteProduct}

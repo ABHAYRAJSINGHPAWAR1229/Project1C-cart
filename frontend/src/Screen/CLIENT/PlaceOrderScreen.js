@@ -47,30 +47,32 @@ const PlaceOrderScreen=()=>{
   },[cart.paymentMethod,cart.shippingAddress.address,navigate])
   return (
   <>
-   <LinkContainer to='/payment'>
+  <div className='bg-gr'> 
+      <LinkContainer to='/payment'>
       <Button className='btn-block'>Back</Button>
     </LinkContainer>
 
-<h1>Place Order screen</h1>
+
 <CheckOutSteps step1 step2 step3 step4 step5/>
   <Row>
-    <Col md={8}>
-    <ListGroup variant='flush'>
-      <ListGroup.Item>
+    <Col md={1}></Col>
+    <Col md={7}>
+    <ListGroup variant='flush' style={{backgroundColor:"lightyellow"}}>
+      <ListGroup.Item style={{backgroundColor:"lightyellow"}}>
         <h2>Shipping</h2>
         <p>
           <strong>Address:</strong>
           {cart.shippingAddress.address},{cart.shippingAddress.city},{cart.shippingAddress.postalCode},{cart.shippingAddress.country}
         </p>
-      </ListGroup.Item>
+      </ListGroup.Item >
 
-      <ListGroup.Item>
+      <ListGroup.Item style={{backgroundColor:"lightyellow"}}>
         <h2>Payment Method</h2>
         <strong>Method:</strong>
         {cart.paymentMethod}
       </ListGroup.Item>
     
-    <ListGroup.Item>
+    <ListGroup.Item style={{backgroundColor:"gold"}}>
       <Card>
       <Card.Header as="h5" className='bg-warning fs-5'>Order Items</Card.Header>
       <Card.Body style={{backgroundColor:'gold' }} >
@@ -141,7 +143,7 @@ const PlaceOrderScreen=()=>{
 
     </ListGroup>
      </Col>
-    <Col md={4} >
+    <Col md={3} >
     <Card>
       <Card.Header as="h5" className='bg-warning fs-5'>Order Summary</Card.Header>
       <Card.Body  style={{backgroundColor:'lightgoldenrodyellow' }}>
@@ -178,6 +180,8 @@ const PlaceOrderScreen=()=>{
       
       </Col>
   </Row>
+  </div>
+
   </>
 )}
 

@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 
 const Error404Screen = () => {
   return (
-    <div>
-         <Card>
+    <div className='bg-gr'>
+         <Card >
             <Card.Header className='bg-warning fs-5'><Card.Title>Error Page</Card.Title></Card.Header>
             <Card.Body style={{backgroundColor:'gold' }}>
                 <ListGroup>

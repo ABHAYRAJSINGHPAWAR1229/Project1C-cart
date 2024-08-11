@@ -37,7 +37,7 @@ const ProductScreen = () => {
    
   return (
     <>
-    <div className='Container' >
+    <div className='Container bg-gr' >
         <div>
             <LinkContainer to='/'>
                 <Button>GO Back</Button>
@@ -52,7 +52,8 @@ const ProductScreen = () => {
 
             
             <Row>
-                <div className='Col col-4 d-flex justify-content-between' >
+              <div className='Col col-1 d-flex justify-content-between'></div>
+                <div className='Col col-3 d-flex justify-content-between' >
                     
                 <Card.Img src={product.image} alt={product.name} width='300px' height='300px' variant='top' />
                 </div>
@@ -73,25 +74,25 @@ const ProductScreen = () => {
                 
             
     
-                <Col className='col-4' float>
-                    <Card>
-                      <ListGroup>
+                <Col className='col-3' float>
+                    <Card >
+                      <ListGroup style={{backgroundColor:"lightyellow"}}>
                         
-                           <ListGroup.Item className='d-flex justify-content-between'>
+                           <ListGroup.Item className=' d-flex justify-content-between ' style={{backgroundColor:"lightyellow"}} >
                            <Col > Price : </Col>
                             <Col > {product.price}</Col>
                              </ListGroup.Item>
                                             
-                           <ListGroup.Item className='d-flex justify-content-between'>
+                           <ListGroup.Item className='d-flex justify-content-between' style={{backgroundColor:"lightyellow"}}>
                             <Col>Stock :</Col>
                             <Col>{product.countInStock>0?'Available':'Not Available'}</Col>
                              </ListGroup.Item>
     
-                               {product.countInStock>0 && ( <ListGroup.Item>
-                                <Row>
+                               {product.countInStock>0 && ( <ListGroup.Item style={{backgroundColor:"lightyellow"}}>
+                                <Row >
                                   <Col>Qty</Col>
-                                  <Col>
-                                  <FormControl as='select' value={qty} onChange={(e)=>setQty(Number(e.target.value))}>
+                                  <Col >
+                                  <FormControl style={{backgroundColor:"lightgoldenrodyellow"}} as='select' value={qty} onChange={(e)=>setQty(Number(e.target.value))}>
                                     {[...Array(product.countInStock).keys()].map((x)=>(
                                       <option key={x+1} value={x+1}>{x+1}</option>
                                     ))}
@@ -101,7 +102,7 @@ const ProductScreen = () => {
                                </ListGroup.Item>
 
                                )}
-                           <ListGroup.Item>
+                           <ListGroup.Item style={{backgroundColor:"lightyellow"}}>
                             <LinkContainer to='/cart'>
                             <Button className='btn btn-block' type='submit'
                              disabled={parseInt(product.countInStock) === 0}
@@ -113,6 +114,7 @@ const ProductScreen = () => {
                       </ListGroup>
                     </Card>
                 </Col>
+                <Col className='col-1'></Col>
     
                 </Row>
           )}

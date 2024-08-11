@@ -2,8 +2,8 @@ import express from 'express'
 //import asyncHandler from '../middleware/asyncHandler.js';
 //import Product from '../models/productSchema.js'
 // import {getProductByID} from '../controllers/productSingle.js'
- import {getProducts,getProductByID,getTopProducts} from '../controllers/productController.js'
-
+ import {getProducts,getProductByID,getTopProducts, deleteProduct} from '../controllers/productController.js'
+import {protect,admin} from '../middleware/authMiddleware.js'
 const router =express.Router()
 
 
@@ -15,7 +15,8 @@ const router =express.Router()
 //     res.json(products);
 // }))
 
- router.route('/:id').get(getProductByID)
+ router.route('/:id').get(getProductByID).delete(protect,admin,deleteProduct)
+ 
 
 // router.get('/:id',asyncHandler(async(req,res)=>{
     
