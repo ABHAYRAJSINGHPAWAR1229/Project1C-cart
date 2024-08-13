@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 
 const HelpScreen = () => {
   return (
-    <div className='bg-gr'>
+    <div className='bg-help' >
       <div>
         <LinkContainer to='/'>
       <Button variant='primary' >  <Button variant='info' disabled>HomeScreen</Button>  </Button>
@@ -18,7 +18,7 @@ const HelpScreen = () => {
                     <ListGroup.Item style={{backgroundColor:'lightyellow' }}><h4>Toll Free Contact Number : </h4> 180017352010 </ListGroup.Item>
                     <ListGroup.Item style={{backgroundColor:'lightyellow' }}><h4>For Technical Support    : </h4>+918737801229 </ListGroup.Item>
                     
-                    <ListGroup.Item style={{backgroundColor:'lightyellow' }}><h4>Email : </h4>abhayrajsinghpawar.cdac@gmail.com</ListGroup.Item>
+                    <ListGroup.Item style={{backgroundColor:'lightyellow' }}><h4>Email : </h4>group.iv.cdac@gmail.com</ListGroup.Item>
                 </ListGroup>
             </Card.Body>
         </Card>

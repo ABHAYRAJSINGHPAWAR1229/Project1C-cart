@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Error404Screen = () => {
   return (
-    <div className='bg-gr'>
+    <div >
          <Card >
             <Card.Header className='bg-warning fs-5'><Card.Title>Error Page</Card.Title></Card.Header>
             <Card.Body style={{backgroundColor:'gold' }}>
@@ -21,9 +21,11 @@ const Error404Screen = () => {
                     <ListGroup.Item style={{backgroundColor:'lightyellow' }}>
                         <label for='btn'>Go to Home page : </label> <Link to='/'><Button type='button' id='btn'> Home </Button></Link>
                     </ListGroup.Item>
+
                 </ListGroup>
             </Card.Body>
         </Card>
+        <div className='bg-error'></div>
     </div>
   )
 }
